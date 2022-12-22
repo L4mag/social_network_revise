@@ -1,9 +1,0 @@
-.profile {
-  display: grid;
-  grid-template-areas:
-    'avatar info info'
-    'posts posts posts';
-  grid-template-columns: 2fr 10fr;
-
-  align-items: start;
-}
