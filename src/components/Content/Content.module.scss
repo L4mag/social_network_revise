@@ -1,0 +1,13 @@
+@use './../../style/colors';
+@use './../../style/defaults';
+
+.content {
+  grid-area: c;
+
+  // grid-template-columns: 2fr 10fr;
+  grid-template-areas: 'avatar info';
+}
+
+.block {
+  @include defaults.block;
+}
