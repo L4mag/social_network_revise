@@ -1,0 +1,21 @@
+@use './style/colors';
+@use './style/defaults';
+
+body {
+  background-color: colors.$primary-bg-color;
+}
+
+.app_wrapper {
+  display: grid;
+
+  max-width: 1000px;
+
+  margin: 20px auto auto;
+
+  // grid-template-rows: 60px 1fr;
+  grid-template-columns: 2fr 10fr;
+
+  grid-template-areas:
+    'h h h'
+    'n c c';
+}
