@@ -33,4 +33,3 @@ const renderEntireApp = (state) => {
 store.subscribe(renderEntireApp)
 
 renderEntireApp(store.getState())
-//some test

@@ -12,10 +12,7 @@ import Dialog from './Dialogs/Dialog/Dialog'
 const Content = ({ state }) => {
   const dialogsPage = state.state.dialogsPage
   const profilePage = state.state.profilePage
-  const addPost = state.addPost
-  const handleAddPostInput = state.handleAddPostInput
-  const addMessage = state.addMessage
-  const handleAddMessageInput = state.handleAddMessageInput
+  const dispatch = state.state.dispatch
 
   return (
     <main className={`${style.Content} ${style.block}`}>
@@ -25,8 +22,7 @@ const Content = ({ state }) => {
           element={
             <Profile
               data={profilePage}
-              addPost={addPost}
-              handleAddPostInput={handleAddPostInput}
+              dispatch={dispatch}
             />
           }
         />
@@ -39,8 +35,7 @@ const Content = ({ state }) => {
           element={
             <Dialog
               data={dialogsPage}
-              addMessage={addMessage}
-              handleAddMessageInput={handleAddMessageInput}
+              dispatch={dispatch}
             />
           }
         />

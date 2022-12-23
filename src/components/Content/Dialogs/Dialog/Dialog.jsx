@@ -1,12 +1,12 @@
 import React from 'react'
 import style from './Dialog.module.scss'
 import { NavLink } from 'react-router-dom'
+import {
+  addMessageActionCreator,
+  handleAddMessageInputActionCreator,
+} from '../../../../redux/state'
 
-const Dialog = ({
-  data,
-  addMessage,
-  handleAddMessageInput,
-}) => {
+const Dialog = ({ data, dispatch }) => {
   console.log(data)
 
   const img = data.dialogs[0].img
@@ -16,11 +16,16 @@ const Dialog = ({
   const inputRef = React.createRef()
 
   const handleClick = () => {
-    addMessage()
+    dispatch(addMessageActionCreator())
   }
 
   const handleChange = () => {
-    handleAddMessageInput(inputRef.current.value)
+    dispatch(
+      handleAddMessageInputActionCreator(
+        inputRef.current.value
+      )
+    )
+    // handleAddMessageInput(inputRef.current.value)
   }
 
   return (

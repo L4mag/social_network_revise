@@ -1,7 +1,13 @@
+const ADD_POST = 'ADD_POST'
+const HANDLE_ADD_POST_INPUT = 'HANDLE_ADD_POST_INPUT'
+const ADD_MESSAGE = 'ADD_MESSAGE'
+const HANDLE_ADD_MESSAGE_INPUT = 'HANDLE_ADD_MESSAGE_INPUT'
+
 const store = {
   _subscriber() {
     console.log('No subscriber function were passed')
   },
+
   _state: {
     profilePage: {
       newPostInput: '',
@@ -62,7 +68,24 @@ const store = {
       ],
     },
   },
-  addPost() {
+
+  getState() {
+    return this._state
+  },
+
+  dispatch(action = { type: '' }) {
+    if ((action.type = ADD_POST)) {
+      this._addPost
+    } else if ((action.type = HANDLE_ADD_POST_INPUT)) {
+      this._handleAddMessageInput(action.postText)
+    } else if ((action.type = ADD_MESSAGE)) {
+      this._addMessage()
+    } else if ((action.type = HANDLE_ADD_MESSAGE_INPUT)) {
+      this._handleAddMessageInput(action.messageText)
+    }
+  },
+
+  _addPost() {
     const post = {
       id: 5,
       author: 'Chuvak 1',
@@ -78,12 +101,12 @@ const store = {
     this._subscriber(this._state)
   },
 
-  handleAddPostInput(postText) {
+  _handleAddPostInput(postText) {
     this._state.profilePage.newPostInput = postText
     this._subscriber(this._state)
   },
 
-  addMessage() {
+  _addMessage() {
     this._state.dialogsPage.dialogs[0].messages.push(
       this._state.dialogsPage.newMessageText
     )
@@ -92,16 +115,34 @@ const store = {
     this._subscriber(this._state)
   },
 
-  handleAddMessageInput(messageText) {
+  _handleAddMessageInput(messageText) {
     this._state.dialogsPage.newMessageText = messageText
     this._subscriber(this._state)
   },
-  getState() {
-    return this._state
-  },
+
   subscribe(observer) {
     this._subscriber = observer
   },
 }
+
+export const addPostActionCreator = () => ({
+  type: ADD_POST,
+})
+
+export const handleAddPostInputActionCreator = (text) => ({
+  type: HANDLE_ADD_POST_INPUT,
+  postText: text,
+})
+
+export const addMessageActionCreator = () => ({
+  type: ADD_MESSAGE,
+})
+
+export const handleAddMessageInputActionCreator = (
+  text
+) => ({
+  type: HANDLE_ADD_MESSAGE_INPUT,
+  messageText: text,
+})
 
 export default store

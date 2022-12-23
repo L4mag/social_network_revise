@@ -1,21 +1,25 @@
 import React from 'react'
+import {
+  addPostActionCreator,
+  handleAddPostInputActionCreator,
+} from '../../../../redux/state'
 import Post from './Post/Post'
 import style from './UserPosts.module.scss'
 
-const UserPosts = ({
-  posts,
-  addPost,
-  handleAddPostInput,
-  newPostInput,
-}) => {
+const UserPosts = ({ posts, addPost, dispatch }) => {
   const inputRef = React.createRef()
 
   const handleClick = () => {
-    addPost()
+    dispatch(addPostActionCreator())
   }
 
   const handleChange = () => {
-    handleAddPostInput(inputRef.current.value)
+    dispatch(
+      handleAddPostInputActionCreator(
+        inputRef.current.value
+      )
+    )
+    // handleAddPostInput(inputRef.current.value)
   }
 
   return (
