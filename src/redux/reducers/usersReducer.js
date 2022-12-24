@@ -8,6 +8,7 @@ const initialState = {
       id: 1,
       name: 'Chuvak 1',
       status: 'Text statusa 1',
+      place: 'Moscow, Russia',
       avatar:
         'https://pict.sindonews.net/dyn/732/pena/news/2022/01/13/39/655579/harga-fotofoto-ghozali-bikin-melongo-ada-yang-laku-rp42-miliiar-fwx.jpg',
       isFollowed: false,
@@ -16,6 +17,7 @@ const initialState = {
       id: 2,
       name: 'Chuvak 2',
       status: 'Text statusa 2',
+      place: 'Moscow, Russia',
       avatar:
         'https://pict.sindonews.net/dyn/732/pena/news/2022/01/13/39/655579/harga-fotofoto-ghozali-bikin-melongo-ada-yang-laku-rp42-miliiar-fwx.jpg',
       isFollowed: true,
@@ -24,6 +26,7 @@ const initialState = {
       id: 3,
       name: 'Chuvak 3',
       status: 'Text statusa 3',
+      place: 'Moscow, Russia',
       avatar:
         'https://pict.sindonews.net/dyn/732/pena/news/2022/01/13/39/655579/harga-fotofoto-ghozali-bikin-melongo-ada-yang-laku-rp42-miliiar-fwx.jpg',
       isFollowed: false,
@@ -38,20 +41,24 @@ const userReducer = (state = initialState, action) => {
     case FOLLOW:
       return {
         ...state,
-        ...state.users.map((user) =>
-          user.id === action.payload.id
-            ? { ...user, isFollowed: true }
-            : user
-        ),
+        users: [
+          ...state.users.map((user) =>
+            user.id === action.payload.id
+              ? { ...user, isFollowed: true }
+              : user
+          ),
+        ],
       }
     case UNFOLLOW:
       return {
         ...state,
-        ...state.users.map((user) =>
-          user.id === action.payload.id
-            ? { ...user, isFollowed: false }
-            : user
-        ),
+        users: [
+          ...state.users.map((user) =>
+            user.id === action.payload.id
+              ? { ...user, isFollowed: false }
+              : user
+          ),
+        ],
       }
     default:
       return state

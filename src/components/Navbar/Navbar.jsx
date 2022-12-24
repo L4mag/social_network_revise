@@ -25,6 +25,17 @@ const Navbar = () => {
           Dialogs
         </NavLink>
       </div>
+
+      <div>
+        <NavLink
+          className={({ isActive }) =>
+            isActive ? style.active : ''
+          }
+          to='users'
+        >
+          Users
+        </NavLink>
+      </div>
       <div>
         <NavLink
           className={({ isActive }) =>

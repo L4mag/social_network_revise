@@ -12,6 +12,7 @@ const reducers = {
 const middleware = (getDefaultMiddleware) =>
   getDefaultMiddleware({
     serializableCheck: false,
+    immutableCheck: true,
     thunk: true,
   })
 
