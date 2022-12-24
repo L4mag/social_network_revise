@@ -1,3 +1,6 @@
+import dialogsPageReducer from './reducers/dialogsReducer'
+import profileReducer from './reducers/profileReducer'
+
 const ADD_POST = 'ADD_POST'
 const HANDLE_ADD_POST_INPUT = 'HANDLE_ADD_POST_INPUT'
 const ADD_MESSAGE = 'ADD_MESSAGE'
@@ -73,50 +76,16 @@ const store = {
     return this._state
   },
 
-  dispatch(action = { type: '' }) {
-    if ((action.type = ADD_POST)) {
-      this._addPost
-    } else if ((action.type = HANDLE_ADD_POST_INPUT)) {
-      this._handleAddMessageInput(action.postText)
-    } else if ((action.type = ADD_MESSAGE)) {
-      this._addMessage()
-    } else if ((action.type = HANDLE_ADD_MESSAGE_INPUT)) {
-      this._handleAddMessageInput(action.messageText)
-    }
-  },
-
-  _addPost() {
-    const post = {
-      id: 5,
-      author: 'Chuvak 1',
-      text: this._state.profilePage.newPostInput,
-      avatar:
-        'https://pict.sindonews.net/dyn/732/pena/news/2022/01/13/39/655579/harga-fotofoto-ghozali-bikin-melongo-ada-yang-laku-rp42-miliiar-fwx.jpg',
-      likesCount: 0,
-    }
-
-    this._state.profilePage.posts.push(post)
-    this._state.profilePage.newPostInput = ''
-
-    this._subscriber(this._state)
-  },
-
-  _handleAddPostInput(postText) {
-    this._state.profilePage.newPostInput = postText
-    this._subscriber(this._state)
-  },
-
-  _addMessage() {
-    this._state.dialogsPage.dialogs[0].messages.push(
-      this._state.dialogsPage.newMessageText
+  dispatch(action) {
+    this._state.dialogsPage = dialogsPageReducer(
+      this._state.dialogsPage,
+      action
     )
-    this._state.dialogsPage.newMessageText = ''
+    this._state.profilePage = profileReducer(
+      this._state.profilePage,
+      action
+    )
 
-    this._subscriber(this._state)
-  },
-
-  _handleAddMessageInput(messageText) {
-    this._state.dialogsPage.newMessageText = messageText
     this._subscriber(this._state)
   },
 
@@ -131,7 +100,7 @@ export const addPostActionCreator = () => ({
 
 export const handleAddPostInputActionCreator = (text) => ({
   type: HANDLE_ADD_POST_INPUT,
-  postText: text,
+  body: text,
 })
 
 export const addMessageActionCreator = () => ({
@@ -142,7 +111,7 @@ export const handleAddMessageInputActionCreator = (
   text
 ) => ({
   type: HANDLE_ADD_MESSAGE_INPUT,
-  messageText: text,
+  body: text,
 })
 
 export default store

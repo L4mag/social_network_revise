@@ -9,10 +9,9 @@ import Videos from '../Videos/Videos'
 import Settings from '../Settings/Settings'
 import Dialog from './Dialogs/Dialog/Dialog'
 
-const Content = ({ state }) => {
-  const dialogsPage = state.state.dialogsPage
-  const profilePage = state.state.profilePage
-  const dispatch = state.state.dispatch
+const Content = ({ state, dispatch }) => {
+  const dialogsPage = state.dialogsPage
+  const profilePage = state.profilePage
 
   return (
     <main className={`${style.Content} ${style.block}`}>

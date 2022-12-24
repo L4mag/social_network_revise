@@ -4,7 +4,7 @@ import Info from './Info/Info'
 import style from './Profile.module.scss'
 import UserPosts from './UserPosts/UserPosts'
 
-const Profile = ({ data, addPost, handleAddPostInput }) => {
+const Profile = ({ data, dispatch }) => {
   const avatar = data.avatar
   const posts = data.posts
   const newPostInput = data.newPostInput
@@ -16,8 +16,7 @@ const Profile = ({ data, addPost, handleAddPostInput }) => {
       <UserPosts
         newPostInput={newPostInput}
         posts={posts}
-        addPost={addPost}
-        handleAddPostInput={handleAddPostInput}
+        dispatch={dispatch}
       />
     </div>
   )

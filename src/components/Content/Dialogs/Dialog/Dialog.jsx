@@ -4,7 +4,7 @@ import { NavLink } from 'react-router-dom'
 import {
   addMessageActionCreator,
   handleAddMessageInputActionCreator,
-} from '../../../../redux/state'
+} from '../../../../redux/store'
 
 const Dialog = ({ data, dispatch }) => {
   console.log(data)

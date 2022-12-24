@@ -2,24 +2,19 @@ import React from 'react'
 import {
   addPostActionCreator,
   handleAddPostInputActionCreator,
-} from '../../../../redux/state'
+} from '../../../../redux/store'
 import Post from './Post/Post'
 import style from './UserPosts.module.scss'
 
-const UserPosts = ({ posts, addPost, dispatch }) => {
-  const inputRef = React.createRef()
-
+const UserPosts = ({ posts, dispatch, newPostInput }) => {
   const handleClick = () => {
     dispatch(addPostActionCreator())
   }
 
-  const handleChange = () => {
+  const handleChange = (e) => {
     dispatch(
-      handleAddPostInputActionCreator(
-        inputRef.current.value
-      )
+      handleAddPostInputActionCreator(e.target.value)
     )
-    // handleAddPostInput(inputRef.current.value)
   }
 
   return (
@@ -27,13 +22,12 @@ const UserPosts = ({ posts, addPost, dispatch }) => {
       <h4>User Posts</h4>
       <div>
         <textarea
-          ref={inputRef}
           rows='1'
           type='text'
           value={newPostInput}
           onChange={handleChange}
         />
-        <button onClick={handleClick}>New Post </button>
+        <button onClick={handleClick}>New Post</button>
       </div>
 
       {posts.map((post) => (
