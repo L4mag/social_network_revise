@@ -4,28 +4,35 @@ import {
   handleAddPostInputActionCreator,
 } from '../../../../redux/store'
 import UserPosts from './UserPosts'
+import { StoreContext } from '../../../../StoreContext'
 
-const UserPostsContainer = ({ store }) => {
-  const posts = store.getState().profilePage.posts
-  const newPostInput =
-    store.getState().profilePage.newPostInput
-  const dispatch = store.dispatch
-
-  const addPost = () => {
-    dispatch(addPostActionCreator())
-  }
-
-  const changeNewPost = (text) => {
-    dispatch(handleAddPostInputActionCreator(text))
-  }
-
+const UserPostsContainer = () => {
   return (
-    <UserPosts
-      posts={posts}
-      changeNewPost={changeNewPost}
-      addPost={addPost}
-      newPostInput={newPostInput}
-    />
+    <StoreContext.Consumer>
+      {(store) => {
+        const posts = store.getState().profilePage.posts
+        const newPostInput =
+          store.getState().profilePage.newPostInput
+        const dispatch = store.dispatch
+
+        const addPost = () => {
+          dispatch(addPostActionCreator())
+        }
+
+        const changeNewPost = (text) => {
+          dispatch(handleAddPostInputActionCreator(text))
+        }
+
+        return (
+          <UserPosts
+            posts={posts}
+            changeNewPost={changeNewPost}
+            addPost={addPost}
+            newPostInput={newPostInput}
+          />
+        )
+      }}
+    </StoreContext.Consumer>
   )
 }
 
