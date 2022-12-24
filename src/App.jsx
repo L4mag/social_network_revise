@@ -5,13 +5,13 @@ import Header from './components/Header/Header'
 import Content from './components/Content/Content'
 import { BrowserRouter } from 'react-router-dom'
 
-const App = ({ state, dispatch }) => {
+const App = ({ store }) => {
   return (
     <BrowserRouter>
       <div className={style.app_wrapper}>
         <Header />
         <Navbar />
-        <Content state={state} dispatch={dispatch} />
+        <Content store={store} />
       </div>
     </BrowserRouter>
   )

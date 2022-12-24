@@ -1,31 +1,21 @@
 import React from 'react'
 import style from './Dialog.module.scss'
 import { NavLink } from 'react-router-dom'
-import {
-  addMessageActionCreator,
-  handleAddMessageInputActionCreator,
-} from '../../../../redux/store'
 
-const Dialog = ({ data, dispatch }) => {
-  console.log(data)
-
-  const img = data.dialogs[0].img
-  const messages = data.dialogs[0].messages
-  const name = data.dialogs[0].name
-
-  const inputRef = React.createRef()
-
-  const handleClick = () => {
-    dispatch(addMessageActionCreator())
+const Dialog = ({
+  img,
+  messages,
+  name,
+  addMessage,
+  changeNewMessageText,
+  newMessageText,
+}) => {
+  const handleAddMessage = () => {
+    addMessage()
   }
 
-  const handleChange = () => {
-    dispatch(
-      handleAddMessageInputActionCreator(
-        inputRef.current.value
-      )
-    )
-    // handleAddMessageInput(inputRef.current.value)
+  const handleNewMessageText = (e) => {
+    changeNewMessageText(e.target.value)
   }
 
   return (
@@ -46,13 +36,14 @@ const Dialog = ({ data, dispatch }) => {
 
       <div>
         <textarea
-          value={data.newMessageText}
-          onChange={handleChange}
-          ref={inputRef}
+          value={newMessageText}
+          onChange={handleNewMessageText}
           rows='1'
           type='text'
         />
-        <button onClick={handleClick}>New Message</button>
+        <button onClick={handleAddMessage}>
+          New Message
+        </button>
       </div>
     </div>
   )

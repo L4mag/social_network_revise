@@ -7,8 +7,16 @@ const reducers = {
   dialogsPage: dialogsReducer,
 }
 
+const middleware = (getDefaultMiddleware) =>
+  getDefaultMiddleware({
+    immutableCheck: false,
+    serializableCheck: false,
+    thunk: true,
+  })
+
 const store = configureStore({
-  reducer: reducers,
+  reducer: { ...reducers },
+  middleware,
 })
 
 export default store

@@ -2,41 +2,25 @@ import React from 'react'
 import style from './Content.module.scss'
 import { Routes, Route } from 'react-router-dom'
 import Profile from './Profile/Profile'
-import Dialogs from './Dialogs/Dialogs'
 import News from '../News/News'
 import Music from '../Music/Music'
 import Videos from '../Videos/Videos'
 import Settings from '../Settings/Settings'
-import Dialog from './Dialogs/Dialog/Dialog'
+import DialogContainer from './Dialogs/Dialog/DialogContainer'
+import DialogsContainer from './Dialogs/DialogsContainer'
 
-const Content = ({ state, dispatch }) => {
-  const dialogsPage = state.dialogsPage
-  const profilePage = state.profilePage
-
+const Content = ({ store }) => {
   return (
-    <main className={`${style.Content} ${style.block}`}>
+    <main className={`${style.content} ${style.block}`}>
       <Routes path='/' element={<Content />}>
-        <Route
-          index
-          element={
-            <Profile
-              data={profilePage}
-              dispatch={dispatch}
-            />
-          }
-        />
+        <Route index element={<Profile store={store} />} />
         <Route
           path='dialogs'
-          element={<Dialogs data={dialogsPage} />}
+          element={<DialogsContainer store={store} />}
         />
         <Route
           path='dialogs/1'
-          element={
-            <Dialog
-              data={dialogsPage}
-              dispatch={dispatch}
-            />
-          }
+          element={<DialogContainer store={store} />}
         />
         <Route path='news' element={<News />} />
         <Route path='music' element={<Music />} />

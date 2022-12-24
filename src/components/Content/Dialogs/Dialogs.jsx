@@ -3,12 +3,7 @@ import style from './Dialogs.module.scss'
 import { NavLink } from 'react-router-dom'
 import DialogItem from './DialogItem/DialogItem'
 
-const Dialogs = ({ data }) => {
-  const dialogs = data.dialogs
-  // const dialogs = data.dialogs.messages
-  // const name = data.dialogs.name
-  // const img = data.dialogs.img
-
+const Dialogs = ({ dialogs }) => {
   return (
     <div className={style.dialogs}>
       {dialogs.map((dialog) => {
