@@ -1,27 +1,29 @@
 import React from 'react'
 import style from './Content.module.scss'
 import { Routes, Route } from 'react-router-dom'
-import Profile from './Profile/Profile'
 import News from '../News/News'
 import Music from '../Music/Music'
 import Videos from '../Videos/Videos'
 import Settings from '../Settings/Settings'
 import DialogContainer from './Dialogs/Dialog/DialogContainer'
 import DialogsContainer from './Dialogs/DialogsContainer'
+import ProfileContainer from './Profile/ProfileContainer'
+import UsersContainer from './Users/UsersContainer'
 
-const Content = ({ store }) => {
+const Content = () => {
   return (
     <main className={`${style.content} ${style.block}`}>
       <Routes path='/' element={<Content />}>
-        <Route index element={<Profile store={store} />} />
+        <Route index element={<ProfileContainer />} />
         <Route
           path='dialogs'
-          element={<DialogsContainer store={store} />}
+          element={<DialogsContainer />}
         />
         <Route
           path='dialogs/1'
-          element={<DialogContainer store={store} />}
+          element={<DialogContainer />}
         />
+        <Route path='users' element={<UsersContainer />} />
         <Route path='news' element={<News />} />
         <Route path='music' element={<Music />} />
         <Route path='videos' element={<Videos />} />

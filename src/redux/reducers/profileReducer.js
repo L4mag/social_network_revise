@@ -36,24 +36,39 @@ const initialState = {
 const profileReducer = (state = initialState, action) => {
   switch (action.type) {
     case ADD_POST:
-      const post = {
-        id: 5,
-        author: 'Chuvak 1',
-        text: state.newPostInput,
-        avatar:
-          'https://pict.sindonews.net/dyn/732/pena/news/2022/01/13/39/655579/harga-fotofoto-ghozali-bikin-melongo-ada-yang-laku-rp42-miliiar-fwx.jpg',
-        likesCount: 0,
-      }
+      if (state.newPostInput !== '') {
+        const post = {
+          id: 5,
+          author: 'Chuvak 1',
+          text: state.newPostInput,
+          avatar:
+            'https://pict.sindonews.net/dyn/732/pena/news/2022/01/13/39/655579/harga-fotofoto-ghozali-bikin-melongo-ada-yang-laku-rp42-miliiar-fwx.jpg',
+          likesCount: 0,
+        }
 
-      state.posts.push(post)
-      state.newPostInput = ''
-      return state
+        const newPostInput = ''
+        return {
+          ...state,
+          posts: [...state.posts, post],
+          newPostInput,
+        }
+      } else {
+        return state
+      }
     case HANDLE_ADD_POST_INPUT:
-      state.newPostInput = action.body
-      return state
+      const text = action.payload.text
+      return { ...state, newPostInput: text }
     default:
       return state
   }
 }
+
+export const addPostActionCreator = () => ({
+  type: ADD_POST,
+})
+export const handleAddPostInputActionCreator = (text) => ({
+  type: HANDLE_ADD_POST_INPUT,
+  payload: { text },
+})
 
 export default profileReducer

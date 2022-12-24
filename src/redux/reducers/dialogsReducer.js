@@ -32,15 +32,60 @@ const initialState = {
 const DialogsReducer = (state = initialState, action) => {
   switch (action.type) {
     case ADD_MESSAGE:
-      state.dialogs[0].messages.push(state.newMessageText)
-      state.newMessageText = ''
-      return state
+      if (state.newMessageText !== '') {
+        return {
+          ...state,
+          dialogs: [
+            ...state.dialogs.map((d) =>
+              d.id === 1
+                ? {
+                    ...d,
+                    messages: [
+                      ...d.messages,
+                      state.newMessageText,
+                    ],
+                  }
+                : d
+            ),
+          ],
+          newMessageText: '',
+        }
+      } else {
+        return state
+      }
     case HANDLE_ADD_MESSAGE_INPUT:
-      state.newMessageText = action.body
-      return state
+      return {
+        ...state,
+        newMessageText: action.payload.text,
+      }
     default:
       return state
   }
 }
 
+export const addMessageActionCreator = () => ({
+  type: ADD_MESSAGE,
+})
+export const handleAddMessageInputActionCreator = (
+  text
+) => ({
+  type: HANDLE_ADD_MESSAGE_INPUT,
+  payload: { text },
+})
+
 export default DialogsReducer
+
+// // ...state.dialogs,
+// // ...state.dialogs.map((d) => {
+// //   // debugger
+//   if (d.id === 1) {
+//     const temp = {
+//       ...d,
+//       messages: [
+//         ...d.messages,
+//         state.newMessageText,
+//       ],
+//     }
+//     return temp
+//   }
+// // }),

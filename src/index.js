@@ -3,21 +3,19 @@ import ReactDOM from 'react-dom/client'
 import './style/index.scss'
 import App from './App'
 import store from './redux/reduxStore'
+import { BrowserRouter } from 'react-router-dom'
+import { Provider } from 'react-redux'
 
 const root = ReactDOM.createRoot(
   document.getElementById('root')
 )
 
-const renderEntireApp = () => {
-  root.render(
-    <React.StrictMode>
-      <App store={store} />
-    </React.StrictMode>
-  )
-}
-
-store.subscribe(() => {
-  renderEntireApp()
-})
-
-renderEntireApp()
+root.render(
+  <React.StrictMode>
+    <BrowserRouter>
+      <Provider store={store}>
+        <App />
+      </Provider>
+    </BrowserRouter>
+  </React.StrictMode>
+)

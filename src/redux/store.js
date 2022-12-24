@@ -1,11 +1,6 @@
 import dialogsPageReducer from './reducers/dialogsReducer'
 import profileReducer from './reducers/profileReducer'
 
-const ADD_POST = 'ADD_POST'
-const HANDLE_ADD_POST_INPUT = 'HANDLE_ADD_POST_INPUT'
-const ADD_MESSAGE = 'ADD_MESSAGE'
-const HANDLE_ADD_MESSAGE_INPUT = 'HANDLE_ADD_MESSAGE_INPUT'
-
 const store = {
   _subscriber() {
     console.log('No subscriber function were passed')
@@ -93,25 +88,5 @@ const store = {
     this._subscriber = observer
   },
 }
-
-export const addPostActionCreator = () => ({
-  type: ADD_POST,
-})
-
-export const handleAddPostInputActionCreator = (text) => ({
-  type: HANDLE_ADD_POST_INPUT,
-  body: text,
-})
-
-export const addMessageActionCreator = () => ({
-  type: ADD_MESSAGE,
-})
-
-export const handleAddMessageInputActionCreator = (
-  text
-) => ({
-  type: HANDLE_ADD_MESSAGE_INPUT,
-  body: text,
-})
 
 export default store

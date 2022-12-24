@@ -1,46 +1,32 @@
 import React from 'react'
+import { connect } from 'react-redux'
+import Dialog from './Dialog'
 import {
   addMessageActionCreator,
   handleAddMessageInputActionCreator,
-} from '../../../../redux/store'
-import Dialog from './Dialog'
-import { StoreContext } from '../../../../StoreContext'
+} from '../../../../redux/reducers/dialogsReducer'
 
-const DialogContainer = () => {
-  return (
-    <StoreContext.Consumer>
-      {(store) => {
-        const img =
-          store.getState().dialogsPage.dialogs[0].img
-        const messages =
-          store.getState().dialogsPage.dialogs[0].messages
-        const name =
-          store.getState().dialogsPage.dialogs[0].name
-        const newMessageText =
-          store.getState().dialogsPage.newMessageText
-        const dispatch = store.dispatch
-
-        const addMessage = () => {
-          dispatch(addMessageActionCreator())
-        }
-
-        const changeNewMessageText = (text) => {
-          dispatch(handleAddMessageInputActionCreator(text))
-          // handleAddMessageInput(inputRef.current.value)
-        }
-        return (
-          <Dialog
-            img={img}
-            messages={messages}
-            name={name}
-            addMessage={addMessage}
-            changeNewMessageText={changeNewMessageText}
-            newMessageText={newMessageText}
-          />
-        )
-      }}
-    </StoreContext.Consumer>
-  )
+const mapStateToProps = (state) => {
+  const dialog = state.dialogsPage.dialogs[0]
+  return {
+    img: dialog.img,
+    messages: dialog.messages,
+    name: dialog.name,
+    newMessageText: state.dialogsPage.newMessageText,
+  }
 }
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    changeNewMessageText: (text) =>
+      dispatch(handleAddMessageInputActionCreator(text)),
+    addMessage: () => dispatch(addMessageActionCreator()),
+  }
+}
+
+const DialogContainer = connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(Dialog)
 
 export default DialogContainer

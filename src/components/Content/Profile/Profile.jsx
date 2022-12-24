@@ -4,14 +4,12 @@ import Info from './Info/Info'
 import style from './Profile.module.scss'
 import UserPostsContainer from './UserPosts/UserPostsContainer'
 
-const Profile = ({ store }) => {
-  const avatar = store.getState().profilePage.avatar
-
+const Profile = ({ avatar }) => {
   return (
     <div className={`${style.profile}`}>
       <Avatar img={avatar} />
       <Info />
-      <UserPostsContainer store={store} />
+      <UserPostsContainer />
     </div>
   )
 }
