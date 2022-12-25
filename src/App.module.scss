@@ -1,8 +1,9 @@
-@use './style/colors';
-@use './style/defaults';
+@import './style/custom';
+@import './style/colors';
+@import '~bootstrap/scss/bootstrap';
 
 body {
-  background-color: colors.$primary-bg-color;
+  background-color: $primary-bg-color;
 }
 
 .app_wrapper {

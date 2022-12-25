@@ -1,34 +1,19 @@
-.container {
-  margin: 20px;
+@import './src/style/colors';
 
-  display: grid;
+.pagination {
+  margin-top: auto;
+  margin-left: auto;
+  margin-right: auto;
 
-  grid-template-columns: 2fr 10fr 1fr;
-}
+  .pageItem {
+    a {
+      color: $primary-text-color;
+      background-color: #6c757d;
+      border-color: #6c757d;
 
-.avatar {
-  img {
-    width: 80px;
-    height: 80px;
-    border-radius: 50%;
-    object-fit: cover;
-
-    object-fit: cover;
+      &:hover {
+        background-color: #5c636a;
+      }
+    }
   }
-
-}
-
-.info {
-  div {
-    margin: 3px 0;
-  }
-
-}
-
-.follow {
-  button {
-    width: 100px;
-    height: 30px;
-  }
-
 }

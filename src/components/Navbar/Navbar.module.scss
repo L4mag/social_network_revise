@@ -6,8 +6,6 @@
 
   // padding: 20px;
 
-
-
   a {
     display: block;
     @include defaults.block;
@@ -22,8 +20,6 @@
       background-color: colors.$button-hover-color;
       box-shadow: 0px 0px 5px #333;
     }
-
-
   }
 
   a.active {
@@ -32,8 +28,6 @@
     cursor: default;
   }
 }
-
-
 
 .block {
   @include defaults.block;

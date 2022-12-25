@@ -3,12 +3,18 @@ import { connect } from 'react-redux'
 import Users from './Users'
 import {
   followUserActionCreator,
+  setCurrentPageActionCreator,
   setUsersActionCreator,
   unFollowUserActionCreator,
 } from '../../../redux/reducers/usersReducer'
 
 const mapStateToProps = (state) => {
-  return { users: state.usersPage.users }
+  return {
+    users: state.usersPage.users,
+    currentPage: state.usersPage.currentPage,
+    usersCount: state.usersPage.usersCount,
+    pageSize: state.usersPage.pageSize,
+  }
 }
 
 const mapDispatchToProps = (dispatch) => {
@@ -16,7 +22,10 @@ const mapDispatchToProps = (dispatch) => {
     follow: (id) => dispatch(followUserActionCreator(id)),
     unFollow: (id) =>
       dispatch(unFollowUserActionCreator(id)),
-    setUsers: () => dispatch(setUsersActionCreator()),
+    setUsers: (users) =>
+      dispatch(setUsersActionCreator(users)),
+    setCurrentPage: (page) =>
+      dispatch(setCurrentPageActionCreator(page)),
   }
 }
 

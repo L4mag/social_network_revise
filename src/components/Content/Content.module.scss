@@ -2,6 +2,8 @@
 @use './../../style/defaults';
 
 .content {
+  display: flex;
+  flex-direction: column;
   grid-area: c;
 
   // grid-template-columns: 2fr 10fr;
