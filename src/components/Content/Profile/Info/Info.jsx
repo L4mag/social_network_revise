@@ -1,14 +1,19 @@
 import React from 'react'
 import style from './Info.module.scss'
 
-const Info = () => {
+const Info = ({ profile }) => {
+  debugger
+  const profileInfo = profile || {
+    userId: '',
+    fullName: 'Sergey Savchuk',
+    contacts: {},
+  }
+
   return (
     <div className={`${style.info}`}>
-      <h3>Sergey Savchuk</h3>
+      <h3>{profileInfo.fullName}</h3>
       <div>
-        <div>22 years</div>
-        <div>Moscow, Russia</div>
-        <div>Music, Computer Science</div>
+        <div>{profile.aboutMe || 'undefined info'}</div>
       </div>
     </div>
   )

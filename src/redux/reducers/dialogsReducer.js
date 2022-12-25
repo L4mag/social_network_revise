@@ -63,12 +63,10 @@ const DialogsReducer = (state = initialState, action) => {
   }
 }
 
-export const addMessageActionCreator = () => ({
+export const addMessage = () => ({
   type: ADD_MESSAGE,
 })
-export const handleAddMessageInputActionCreator = (
-  text
-) => ({
+export const handleAddMessageInput = (text) => ({
   type: HANDLE_ADD_MESSAGE_INPUT,
   payload: { text },
 })

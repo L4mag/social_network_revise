@@ -1,5 +1,5 @@
 import React from 'react'
-import style from './Videos.module.scss'
+// import style from './Videos.module.scss'
 
 const Videos = (props) => {
   return (

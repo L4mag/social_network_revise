@@ -1,9 +1,11 @@
 @import './src/style/colors';
 
+.spinner {
+  margin: auto;
+}
+
 .pagination {
-  margin-top: auto;
-  margin-left: auto;
-  margin-right: auto;
+  margin: 2rem auto;
 
   .pageItem {
     a {

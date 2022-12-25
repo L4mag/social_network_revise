@@ -5,7 +5,7 @@ import style from './UserPosts.module.scss'
 const UserPosts = ({
   posts,
   addPost,
-  changeNewPost,
+  handleAddPostInput,
   newPostInput,
 }) => {
   const addPostHandler = () => {
@@ -13,7 +13,7 @@ const UserPosts = ({
   }
 
   const changePostHandler = (e) => {
-    changeNewPost(e.target.value)
+    handleAddPostInput(e.target.value)
   }
 
   return (
@@ -30,11 +30,7 @@ const UserPosts = ({
       </div>
 
       {posts.map((post) => (
-        <Post
-          author={post.author}
-          text={post.text}
-          img={post.avatar}
-        />
+        <Post {...post} />
       ))}
     </div>
   )

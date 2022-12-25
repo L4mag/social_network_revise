@@ -1,5 +1,6 @@
 const ADD_POST = 'ADD_POST'
 const HANDLE_ADD_POST_INPUT = 'HANDLE_ADD_POST_INPUT'
+const SET_PROFILE = 'SET_PROFILE'
 
 const initialState = {
   newPostInput: '',
@@ -31,6 +32,7 @@ const initialState = {
       likesCount: 0,
     },
   ],
+  profile: null,
 }
 
 const profileReducer = (state = initialState, action) => {
@@ -58,17 +60,27 @@ const profileReducer = (state = initialState, action) => {
     case HANDLE_ADD_POST_INPUT:
       const text = action.payload.text
       return { ...state, newPostInput: text }
+    case SET_PROFILE:
+      return {
+        ...state,
+        profile: { ...action.payload.profile },
+      }
     default:
       return state
   }
 }
 
-export const addPostActionCreator = () => ({
+export const addPost = () => ({
   type: ADD_POST,
 })
-export const handleAddPostInputActionCreator = (text) => ({
+export const handleAddPostInput = (text) => ({
   type: HANDLE_ADD_POST_INPUT,
   payload: { text },
+})
+
+export const setProfile = (profile) => ({
+  type: SET_PROFILE,
+  payload: { profile },
 })
 
 export default profileReducer

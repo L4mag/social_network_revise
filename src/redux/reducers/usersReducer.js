@@ -2,6 +2,7 @@ const SET_USERS = 'SET_USERS'
 const FOLLOW = 'FOLLOW'
 const UNFOLLOW = 'UNFOLLOW'
 const SET_CURRENT_PAGE = 'SET_CURRENT_PAGE'
+const TOGGLE_IS_FETCHING = 'TOGGLE_IS_FETCHING'
 
 const initialState = {
   users: [
@@ -36,6 +37,7 @@ const initialState = {
   currentPage: 1,
   usersCount: 100,
   pageSize: 6,
+  isFetching: false,
 }
 
 const userReducer = (state = initialState, action) => {
@@ -69,28 +71,37 @@ const userReducer = (state = initialState, action) => {
         ...state,
         currentPage: action.payload.page,
       }
+    case TOGGLE_IS_FETCHING:
+      return {
+        ...state,
+        isFetching: !state.isFetching,
+      }
     default:
       return state
   }
 }
 
-export const setUsersActionCreator = (users) => ({
+export const setUsers = (users) => ({
   type: SET_USERS,
   payload: { users },
 })
-export const followUserActionCreator = (id) => ({
+export const follow = (id) => ({
   type: FOLLOW,
   payload: { id },
 })
 
-export const unFollowUserActionCreator = (id) => ({
+export const unFollow = (id) => ({
   type: UNFOLLOW,
   payload: { id },
 })
 
-export const setCurrentPageActionCreator = (page) => ({
+export const setCurrentPage = (page) => ({
   type: SET_CURRENT_PAGE,
   payload: { page },
+})
+
+export const toggleIsFetching = () => ({
+  type: TOGGLE_IS_FETCHING,
 })
 
 export default userReducer

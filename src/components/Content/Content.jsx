@@ -13,8 +13,22 @@ import UsersContainer from './Users/UsersContainer'
 const Content = () => {
   return (
     <main className={`${style.content} ${style.block}`}>
-      <Routes path='/' element={<Content />}>
-        <Route index element={<ProfileContainer />} />
+      <Routes>
+        <Route
+          index
+          path={'/:userId?'}
+          element={<ProfileContainer />}
+        />
+        <Route
+          index
+          path={'profile/:userId?'}
+          element={<ProfileContainer />}
+        />
+        <Route
+          index
+          path={'/:userId?'}
+          element={<ProfileContainer />}
+        />
         <Route
           path='dialogs'
           element={<DialogsContainer />}

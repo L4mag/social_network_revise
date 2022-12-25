@@ -1,5 +1,5 @@
 import React from 'react'
-import style from './Settings.module.scss'
+// import style from './Settings.module.scss'
 
 const Settings = (props) => {
   return (

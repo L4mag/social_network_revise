@@ -1,9 +1,8 @@
-import React from 'react'
 import UserPosts from './UserPosts'
 import { connect } from 'react-redux'
 import {
-  addPostActionCreator,
-  handleAddPostInputActionCreator,
+  addPost,
+  handleAddPostInput,
 } from '../../../../redux/reducers/profileReducer'
 
 const mapStateToProps = (state) => {
@@ -13,19 +12,9 @@ const mapStateToProps = (state) => {
   }
 }
 
-const mapDispatchToProps = (dispatch) => {
-  return {
-    addPost: () => {
-      dispatch(addPostActionCreator())
-    },
-    changeNewPost: (text) => {
-      dispatch(handleAddPostInputActionCreator(text))
-    },
-  }
-}
-const UserPostsContainer = connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(UserPosts)
+const UserPostsContainer = connect(mapStateToProps, {
+  addPost,
+  handleAddPostInput,
+})(UserPosts)
 
 export default UserPostsContainer

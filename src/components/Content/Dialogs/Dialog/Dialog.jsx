@@ -7,7 +7,7 @@ const Dialog = ({
   messages,
   name,
   addMessage,
-  changeNewMessageText,
+  handleAddMessageInput,
   newMessageText,
 }) => {
   const handleAddMessage = () => {
@@ -15,7 +15,7 @@ const Dialog = ({
   }
 
   const handleNewMessageText = (e) => {
-    changeNewMessageText(e.target.value)
+    handleAddMessageInput(e.target.value)
   }
 
   return (
