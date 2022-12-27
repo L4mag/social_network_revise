@@ -2,7 +2,6 @@ import React from 'react'
 import style from './Info.module.scss'
 
 const Info = ({ profile }) => {
-  debugger
   const profileInfo = profile || {
     userId: '',
     fullName: 'Sergey Savchuk',

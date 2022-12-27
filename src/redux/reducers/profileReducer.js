@@ -1,3 +1,5 @@
+import { profilesAPI } from '../../api/api'
+
 const ADD_POST = 'ADD_POST'
 const HANDLE_ADD_POST_INPUT = 'HANDLE_ADD_POST_INPUT'
 const SET_PROFILE = 'SET_PROFILE'
@@ -33,6 +35,7 @@ const initialState = {
     },
   ],
   profile: null,
+  isProfile: false,
 }
 
 const profileReducer = (state = initialState, action) => {
@@ -82,5 +85,14 @@ export const setProfile = (profile) => ({
   type: SET_PROFILE,
   payload: { profile },
 })
+
+export const setProfileThunkCreator =
+  (profileId = 27223) =>
+  (dispatch) => {
+    profilesAPI.getUserProfile(profileId).then((data) => {
+      dispatch(setProfile(data))
+      // this.props.toggleIsFetching()
+    })
+  }
 
 export default profileReducer

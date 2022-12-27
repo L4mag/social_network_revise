@@ -1,3 +1,5 @@
+import { usersAPI } from '../../api/api'
+
 const SET_USERS = 'SET_USERS'
 const FOLLOW = 'FOLLOW'
 const UNFOLLOW = 'UNFOLLOW'
@@ -103,5 +105,31 @@ export const setCurrentPage = (page) => ({
 export const toggleIsFetching = () => ({
   type: TOGGLE_IS_FETCHING,
 })
+
+export const setUsersThunkCreator =
+  (currentPage, pageSize) => (dispatch) => {
+    dispatch(toggleIsFetching())
+    usersAPI
+      .getUsers(currentPage, pageSize)
+      .then((data) => {
+        dispatch(setUsers(data))
+        dispatch(toggleIsFetching())
+        dispatch(setCurrentPage(currentPage))
+      })
+  }
+
+export const followThunkCreator =
+  (userId) => (dispatch) => {
+    usersAPI.followUser(userId).then(() => {
+      dispatch(follow(userId))
+    })
+  }
+
+export const unFollowThunkCreator =
+  (userId) => (dispatch) => {
+    usersAPI.unFollowUser(userId).then(() => {
+      dispatch(unFollow(userId))
+    })
+  }
 
 export default userReducer

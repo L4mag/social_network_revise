@@ -4,15 +4,17 @@ import style from './Users.module.scss'
 import Pagination from 'react-bootstrap/Pagination'
 import UserImage from './../../../assets/user.png'
 
-const Users = ({
-  users,
-  currentPage,
-  usersCount,
-  pageSize,
-  onSetPageHandler,
-  onFollowHandler,
-  onUnFollowHandler,
-}) => {
+const Users = (props) => {
+  const {
+    users,
+    currentPage,
+    usersCount,
+    pageSize,
+    onSetPageHandler,
+    onFollowHandler,
+    onUnFollowHandler,
+  } = props
+
   const pagesCount = Math.ceil(usersCount / pageSize)
   const pages = []
 
@@ -34,13 +36,9 @@ const Users = ({
     <>
       {users.map((user) => (
         <UserItem
-          name={user.name}
+          {...user}
           key={user.id}
-          id={user.id}
           avatar={user.photos.small || UserImage}
-          location={user.location}
-          status={user.status}
-          isFollowed={user.isFollowed}
           onFollowHandler={onFollowHandler}
           onUnFollowHandler={onUnFollowHandler}
         />
