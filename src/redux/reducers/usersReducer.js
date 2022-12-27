@@ -7,35 +7,7 @@ const SET_CURRENT_PAGE = 'SET_CURRENT_PAGE'
 const TOGGLE_IS_FETCHING = 'TOGGLE_IS_FETCHING'
 
 const initialState = {
-  users: [
-    // {
-    //   id: 1,
-    //   name: 'Chuvak 1',
-    //   status: 'Text statusa 1',
-    //   location: 'Moscow, Russia',
-    //   avatar:
-    //     'https://pict.sindonews.net/dyn/732/pena/news/2022/01/13/39/655579/harga-fotofoto-ghozali-bikin-melongo-ada-yang-laku-rp42-miliiar-fwx.jpg',
-    //   isFollowed: false,
-    // },
-    // {
-    //   id: 2,
-    //   name: 'Chuvak 2',
-    //   status: 'Text statusa 2',
-    //   location: 'Moscow, Russia',
-    //   avatar:
-    //     'https://pict.sindonews.net/dyn/732/pena/news/2022/01/13/39/655579/harga-fotofoto-ghozali-bikin-melongo-ada-yang-laku-rp42-miliiar-fwx.jpg',
-    //   isFollowed: true,
-    // },
-    // {
-    //   id: 3,
-    //   name: 'Chuvak 3',
-    //   status: 'Text statusa 3',
-    //   location: 'Moscow, Russia',
-    //   avatar:
-    //     'https://pict.sindonews.net/dyn/732/pena/news/2022/01/13/39/655579/harga-fotofoto-ghozali-bikin-melongo-ada-yang-laku-rp42-miliiar-fwx.jpg',
-    //   isFollowed: false,
-    // },
-  ],
+  users: [],
   currentPage: 1,
   usersCount: 100,
   pageSize: 6,
@@ -47,12 +19,25 @@ const userReducer = (state = initialState, action) => {
     case SET_USERS:
       return { ...state, users: action.payload.users }
     case FOLLOW:
-      return {
+      debugger
+
+      const tempState = {
         ...state,
         users: [
           ...state.users.map((user) =>
             user.id === action.payload.id
               ? { ...user, isFollowed: true }
+              : user
+          ),
+        ],
+      }
+
+      return {
+        ...state,
+        users: [
+          ...state.users.map((user) =>
+            user.id === action.payload.id
+              ? { ...user, followed: true }
               : user
           ),
         ],
@@ -63,7 +48,7 @@ const userReducer = (state = initialState, action) => {
         users: [
           ...state.users.map((user) =>
             user.id === action.payload.id
-              ? { ...user, isFollowed: false }
+              ? { ...user, followed: false }
               : user
           ),
         ],

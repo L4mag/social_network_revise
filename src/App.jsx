@@ -3,6 +3,7 @@ import React from 'react'
 import Navbar from './components/Navbar/Navbar'
 import Content from './components/Content/Content'
 import HeaderContainer from './components/Header/HeaderContainer'
+import Login from './components/Login/Login'
 
 const App = () => {
   return (

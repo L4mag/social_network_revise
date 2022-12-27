@@ -11,7 +11,7 @@ const UserItem = ({
   avatar,
   place,
   status,
-  isFollowed,
+  followed,
   onUnFollowHandler,
   onFollowHandler,
 }) => {
@@ -31,7 +31,7 @@ const UserItem = ({
           <Card.Text>{status}</Card.Text>
         </div>
 
-        {isFollowed ? (
+        {followed ? (
           <Button
             className={style.userItemFollowBtn}
             variant='secondary'

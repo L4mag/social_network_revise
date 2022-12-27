@@ -9,24 +9,16 @@ import DialogContainer from './Dialogs/Dialog/DialogContainer'
 import DialogsContainer from './Dialogs/DialogsContainer'
 import ProfileContainer from './Profile/ProfileContainer'
 import UsersContainer from './Users/UsersContainer'
+import Login from '../Login/Login'
 
 const Content = () => {
   return (
     <main className={`${style.content} ${style.block}`}>
       <Routes>
-        <Route
-          index
-          path={'/:userId?'}
-          element={<ProfileContainer />}
-        />
+        <Route path={'/login'} element={<Login />} />
         <Route
           index
           path={'profile/:userId?'}
-          element={<ProfileContainer />}
-        />
-        <Route
-          index
-          path={'/:userId?'}
           element={<ProfileContainer />}
         />
         <Route

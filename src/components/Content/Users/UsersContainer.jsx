@@ -9,6 +9,8 @@ import {
 } from '../../../redux/reducers/usersReducer'
 import withRouter from '../../tools/withRouter'
 import Preloader from '../../tools/Preloader'
+import { compose } from 'redux'
+import withAuthRedirect from '../../../hoc/withAuthRedirect'
 
 class UsersContainer extends React.Component {
   constructor(props) {
@@ -41,6 +43,7 @@ class UsersContainer extends React.Component {
   }
   render() {
     const isFetching = this.props.isFetching
+    const props = this.props
 
     return (
       <>
@@ -66,12 +69,17 @@ const mapStateToProps = (state) => {
     usersCount: state.usersPage.usersCount,
     pageSize: state.usersPage.pageSize,
     isFetching: state.usersPage.isFetching,
+    isAuth: state.auth.isAuth,
   }
 }
 
-export default connect(mapStateToProps, {
-  setCurrentPage,
-  setUsersThunkCreator,
-  followThunkCreator,
-  unFollowThunkCreator,
-})(withRouter(UsersContainer))
+export default compose(
+  connect(mapStateToProps, {
+    setCurrentPage,
+    setUsersThunkCreator,
+    followThunkCreator,
+    unFollowThunkCreator,
+  }),
+  withAuthRedirect,
+  withRouter
+)(UsersContainer)
