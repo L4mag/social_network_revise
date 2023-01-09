@@ -21,6 +21,11 @@ const Content = () => {
           path={'profile/:userId?'}
           element={<ProfileContainer />}
         />
+
+        <Route
+          path={'/'}
+          element={<ProfileContainer />}
+        />
         <Route
           path='dialogs'
           element={<DialogsContainer />}

@@ -1,6 +1,12 @@
 import React from 'react'
 import Post from './Post/Post'
 import style from './UserPosts.module.scss'
+import {
+  Form,
+  FormControl,
+  FormGroup,
+} from 'react-bootstrap'
+import Button from 'react-bootstrap/Button'
 
 const UserPosts = ({
   posts,
@@ -19,15 +25,23 @@ const UserPosts = ({
   return (
     <div className={style.posts}>
       <h4>User Posts</h4>
-      <div>
-        <textarea
-          rows='1'
+      <Form
+        className={style.newPostForm}
+        onSubmit={(e) => {
+          e.preventDefault()
+        }}
+      >
+        <FormControl
           type='text'
-          value={newPostInput}
+          placeholder='Post Text'
+          className={style.newPostFormInput}
           onChange={changePostHandler}
+          value={newPostInput}
         />
-        <button onClick={addPostHandler}>New Post</button>
-      </div>
+        <Button onClick={addPostHandler} type='submit'>
+          Add Post
+        </Button>
+      </Form>
 
       {posts.map((post) => (
         <Post {...post} />

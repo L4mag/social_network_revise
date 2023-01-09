@@ -9,9 +9,12 @@
     "@testing-library/user-event": "^13.5.0",
     "axios": "^1.2.1",
     "bootstrap": "^5.2.3",
+    "final-form": "^4.20.7",
     "react": "^18.2.0",
     "react-bootstrap": "^2.7.0",
     "react-dom": "^18.2.0",
+    "react-final-form": "^6.5.9",
+    "react-paginate": "^8.1.4",
     "react-redux": "^8.0.5",
     "react-router": "^6.5.0",
     "react-router-dom": "^6.5.0",
@@ -26,12 +29,6 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
-  },
-  "eslintConfig": {
-    "extends": [
-      "react-app",
-      "react-app/jest"
-    ]
   },
   "browserslist": {
     "production": [

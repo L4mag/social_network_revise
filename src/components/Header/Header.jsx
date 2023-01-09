@@ -1,6 +1,8 @@
 import React from 'react'
 import style from './Header.module.scss'
 import UserImage from './../../assets/user.png'
+import Button from 'react-bootstrap/Button'
+import { logout } from '../../redux/reducers/authReducer'
 
 const Header = (props) => {
   const userImage = props.profile
@@ -28,6 +30,9 @@ const Header = (props) => {
                 alt=''
               />
               <div>{props.user.login}</div>
+              <Button onClick={() => props.logout()}>
+                Logout
+              </Button>
             </div>
           ) : (
             <div>Login</div>

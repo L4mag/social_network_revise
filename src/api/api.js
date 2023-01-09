@@ -12,7 +12,7 @@ export const usersAPI = {
   getUsers(currentPage = 1, pageSize = 8) {
     return apiInstance
       .get(`users?page=${currentPage}&count=${pageSize}`)
-      .then((response) => response.data.items)
+      .then((response) => response.data)
   },
   followUser(userId) {
     return apiInstance
@@ -30,16 +30,24 @@ export const authAPI = {
   getUserData() {
     return apiInstance
       .get(`auth/me`)
-      .then((response) => response.data.data)
+      .then((response) => response.data)
+  },
+  login(email, password, rememberMe) {
+    return apiInstance
+      .post(`auth/login`, { email, password, rememberMe })
+      .then((response) => response.data)
+  },
+  logout(email, password, rememberMe) {
+    return apiInstance
+      .post(`auth/logout`)
+      .then((response) => response.data)
   },
 }
 
 export const profilesAPI = {
   getUserProfile(userId) {
     return apiInstance
-      .get(
-        `https://social-network.samuraijs.com/api/1.0/profile/${userId}`
-      )
+      .get(`profile/${userId}`)
       .then((response) => response.data)
   },
 }

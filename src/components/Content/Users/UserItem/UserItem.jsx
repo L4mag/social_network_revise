@@ -4,6 +4,7 @@ import Card from 'react-bootstrap/Card'
 import Image from 'react-bootstrap/Image'
 import Button from 'react-bootstrap/Button'
 import { NavLink } from 'react-router-dom'
+import { toggleIsFollowFetching } from '../../../../redux/reducers/usersReducer'
 
 const UserItem = ({
   name,
@@ -14,6 +15,7 @@ const UserItem = ({
   followed,
   onUnFollowHandler,
   onFollowHandler,
+  isFollowFetching,
 }) => {
   return (
     <Card className={style.userItem}>
@@ -33,6 +35,7 @@ const UserItem = ({
 
         {followed ? (
           <Button
+            disabled={isFollowFetching}
             className={style.userItemFollowBtn}
             variant='secondary'
             onClick={() => {
@@ -43,6 +46,7 @@ const UserItem = ({
           </Button>
         ) : (
           <Button
+            disabled={isFollowFetching}
             variant='primary'
             className={style.userItemFollowBtn}
             onClick={() => {
