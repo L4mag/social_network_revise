@@ -50,4 +50,14 @@ export const profilesAPI = {
       .get(`profile/${userId}`)
       .then((response) => response.data)
   },
+  getUserStatus(userId) {
+    return apiInstance
+      .get(`profile/status/${userId}`)
+      .then((response) => response.data)
+  },
+  setUserStatus(status) {
+    return apiInstance
+      .put(`profile/status`, { status })
+      .then((response) => response.data)
+  },
 }

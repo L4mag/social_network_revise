@@ -1,3 +1,5 @@
+@import '../../../../style/colors';
+
 .info {
   margin-top: auto;
   margin-bottom: 50px;
@@ -6,4 +8,13 @@
   h3 {
     display: block;
   }
+}
+
+.moreInfo {
+  padding: 0px;
+  margin-top: 10px;
+}
+
+.empty {
+  font-size: 0.8em;
 }

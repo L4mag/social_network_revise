@@ -1,8 +1,10 @@
 import { profilesAPI } from '../../api/api'
+import users from '../../components/Content/Users/Users'
 
 const ADD_POST = 'ADD_POST'
 const HANDLE_ADD_POST_INPUT = 'HANDLE_ADD_POST_INPUT'
 const SET_PROFILE = 'SET_PROFILE'
+const SET_STATUS = 'SET_STATUS'
 
 const initialState = {
   newPostInput: '',
@@ -35,6 +37,7 @@ const initialState = {
     },
   ],
   profile: null,
+  status: '',
   isProfile: false,
 }
 
@@ -68,6 +71,11 @@ const profileReducer = (state = initialState, action) => {
         ...state,
         profile: { ...action.payload.profile },
       }
+    case SET_STATUS:
+      return {
+        ...state,
+        status: action.payload.status,
+      }
     default:
       return state
   }
@@ -86,12 +94,30 @@ export const setProfile = (profile) => ({
   payload: { profile },
 })
 
+const setStatus = (status) => ({
+  type: SET_STATUS,
+  payload: { status },
+})
+
 export const setProfileThunkCreator =
   (profileId = 27223) =>
   (dispatch) => {
     profilesAPI.getUserProfile(profileId).then((data) => {
       dispatch(setProfile(data))
       // this.props.toggleIsFetching()
+    })
+  }
+
+export const requestStatus = (userId) => (dispatch) => {
+  profilesAPI.getUserStatus(userId).then((response) => {
+    dispatch(setStatus(response))
+  })
+}
+
+export const pushNewStatus =
+  (status, userId) => (dispatch) => {
+    profilesAPI.setUserStatus(status).then((response) => {
+      dispatch(requestStatus(userId))
     })
   }
 
