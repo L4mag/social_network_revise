@@ -19,7 +19,12 @@ const initialState = {
   messages: null,
 }
 
-const authReducer = (state = initialState, action) => {
+type InitialStateType = typeof initialState
+
+const authReducer = (
+  state = initialState,
+  action: { type: any; payload: { messages: any } }
+) => {
   switch (action.type) {
     case SET_USER_DATA:
       return {
@@ -51,33 +56,47 @@ const authReducer = (state = initialState, action) => {
   }
 }
 
-export const setUserData = (userData) => ({
+export const setUserData = (userData: {
+  id: number
+  email: string
+  login: string
+}) => ({
   type: SET_USER_DATA,
   payload: { ...userData },
 })
 
-export const setUserProfileData = (userProfileData) => ({
+export const setUserProfileData = (
+  userProfileData: any
+) => ({
   type: SET_USER_PROFILE_DATA,
   payload: userProfileData,
 })
 
-const setMessages = (messages) => ({
+const setMessages = (messages: string[]) => ({
   type: SET_MESSAGES,
   payload: {
     messages,
   },
 })
 
-export const authMe = () => (dispatch) => {
-  authAPI.getUserData().then((r) => {
-    if (r.resultCode === 0) {
-      dispatch(setUserData(r.data))
-    }
-  })
-}
+export const authMe =
+  () =>
+  (
+    dispatch: (arg0: {
+      type: string
+      payload: { id: number; email: string; login: string }
+    }) => void
+  ) => {
+    authAPI.getUserData().then((r) => {
+      if (r.resultCode === 0) {
+        dispatch(setUserData(r.data))
+      }
+    })
+  }
 
 export const login =
-  (email, password, rememberMe) => (dispatch) => {
+  (email: string, password: string, rememberMe: boolean) =>
+  (dispatch: (arg0: unknown) => void) => {
     authAPI.login(email, password, rememberMe).then((r) => {
       if (r.resultCode === 0) {
         dispatch(authMe())
@@ -86,12 +105,13 @@ export const login =
     })
   }
 
-export const logout = () => (dispatch) => {
-  authAPI.logout().then((r) => {
-    if (r.resultCode === 0) {
-      dispatch({ type: LOGOUT })
-    }
-  })
-}
+export const logout =
+  () => (dispatch: (arg0: { type: string }) => void) => {
+    authAPI.logout().then((r) => {
+      if (r.resultCode === 0) {
+        dispatch({ type: LOGOUT })
+      }
+    })
+  }
 
 export default authReducer

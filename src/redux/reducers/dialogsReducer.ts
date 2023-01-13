@@ -29,7 +29,12 @@ const initialState = {
   ],
 }
 
-const DialogsReducer = (state = initialState, action) => {
+type InitialStateType = typeof initialState
+
+const DialogsReducer = (
+  state = initialState,
+  action: { type: any; payload?: { text: any } }
+): InitialStateType => {
   switch (action.type) {
     case ADD_MESSAGE:
       if (state.newMessageText !== '') {
@@ -54,6 +59,7 @@ const DialogsReducer = (state = initialState, action) => {
         return state
       }
     case HANDLE_ADD_MESSAGE_INPUT:
+      // @ts-ignore
       return {
         ...state,
         newMessageText: action.payload.text,
@@ -66,7 +72,7 @@ const DialogsReducer = (state = initialState, action) => {
 export const addMessage = () => ({
   type: ADD_MESSAGE,
 })
-export const handleAddMessageInput = (text) => ({
+export const handleAddMessageInput = (text: any) => ({
   type: HANDLE_ADD_MESSAGE_INPUT,
   payload: { text },
 })

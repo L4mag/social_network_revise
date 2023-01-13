@@ -1,5 +1,5 @@
 import { profilesAPI } from '../../api/api'
-import users from '../../components/Content/Users/Users'
+import { ApiProfileResponseType } from '../../types/types'
 
 const ADD_POST = 'ADD_POST'
 const HANDLE_ADD_POST_INPUT = 'HANDLE_ADD_POST_INPUT'
@@ -41,7 +41,15 @@ const initialState = {
   isProfile: false,
 }
 
-const profileReducer = (state = initialState, action) => {
+type InitialStateType = typeof initialState
+
+const profileReducer = (
+  state = initialState,
+  action: {
+    type: any
+    payload?: any
+  }
+): InitialStateType => {
   switch (action.type) {
     case ADD_POST:
       if (state.newPostInput !== '') {
@@ -84,38 +92,52 @@ const profileReducer = (state = initialState, action) => {
 export const addPost = () => ({
   type: ADD_POST,
 })
-export const handleAddPostInput = (text) => ({
+export const handleAddPostInput = (text: string) => ({
   type: HANDLE_ADD_POST_INPUT,
   payload: { text },
 })
 
-export const setProfile = (profile) => ({
+export const setProfile = (
+  profile: ApiProfileResponseType
+) => ({
   type: SET_PROFILE,
   payload: { profile },
 })
 
-const setStatus = (status) => ({
+const setStatus = (status: string | void) => ({
   type: SET_STATUS,
   payload: { status },
 })
 
 export const setProfileThunkCreator =
   (profileId = 27223) =>
-  (dispatch) => {
+  (
+    dispatch: (arg0: {
+      type: string
+      payload: { profile: ApiProfileResponseType }
+    }) => void
+  ) => {
     profilesAPI.getUserProfile(profileId).then((data) => {
       dispatch(setProfile(data))
-      // this.props.toggleIsFetching()
     })
   }
 
-export const requestStatus = (userId) => (dispatch) => {
-  profilesAPI.getUserStatus(userId).then((response) => {
-    dispatch(setStatus(response))
-  })
-}
+export const requestStatus =
+  (userId: number) =>
+  (
+    dispatch: (arg0: {
+      type: string
+      payload: { status: string | void }
+    }) => void
+  ) => {
+    profilesAPI.getUserStatus(userId).then((response) => {
+      dispatch(setStatus(response))
+    })
+  }
 
 export const pushNewStatus =
-  (status, userId) => (dispatch) => {
+  (status: string, userId: number) =>
+  (dispatch: (arg0: (dispatch: any) => void) => void) => {
     profilesAPI.setUserStatus(status).then((response) => {
       dispatch(requestStatus(userId))
     })
