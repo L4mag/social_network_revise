@@ -1,6 +1,7 @@
 import React from 'react'
 import style from './Post.module.scss'
 import { Col, Container, Row } from 'react-bootstrap'
+import { HiOutlineHeart } from 'react-icons/hi'
 
 const Post = ({ avatar, author, text }) => {
   return (
@@ -24,6 +25,12 @@ const Post = ({ avatar, author, text }) => {
           <Row>
             <Col>
               <div className={`${style.text}`}>{text}</div>
+            </Col>
+          </Row>
+          <hr />
+          <Row>
+            <Col>
+              <HiOutlineHeart /> <span>2</span>
             </Col>
           </Row>
         </div>

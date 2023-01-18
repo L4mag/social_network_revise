@@ -1,7 +1,15 @@
 import React from 'react'
 import style from './Navbar.module.scss'
 import { NavLink } from 'react-router-dom'
-import { FaRegUser } from 'react-icons/fa'
+import {
+  HiOutlineCog,
+  HiOutlineMail,
+  HiOutlineMusicNote,
+  HiOutlineNewspaper,
+  HiOutlineUser,
+  HiOutlineUsers,
+  HiOutlineVideoCamera,
+} from 'react-icons/hi'
 
 const Navbar = () => {
   return (
@@ -13,7 +21,7 @@ const Navbar = () => {
           }
           to='/profile'
         >
-          <FaRegUser /> Account
+          <HiOutlineUser /> Profile
         </NavLink>
       </div>
       <div>
@@ -23,7 +31,7 @@ const Navbar = () => {
           }
           to='dialogs'
         >
-          Dialogs
+          <HiOutlineMail /> Dialogs
         </NavLink>
       </div>
 
@@ -34,7 +42,7 @@ const Navbar = () => {
           }
           to='users'
         >
-          Users
+          <HiOutlineUsers /> Users
         </NavLink>
       </div>
       <div>
@@ -44,7 +52,7 @@ const Navbar = () => {
           }
           to='news'
         >
-          News
+          <HiOutlineNewspaper /> News
         </NavLink>
       </div>
       <div>
@@ -54,7 +62,7 @@ const Navbar = () => {
           }
           to='music'
         >
-          Music
+          <HiOutlineMusicNote /> Music
         </NavLink>
       </div>
       <div>
@@ -64,7 +72,7 @@ const Navbar = () => {
           }
           to='videos'
         >
-          Videos
+          <HiOutlineVideoCamera /> Videos
         </NavLink>
       </div>
       <div>
@@ -74,7 +82,7 @@ const Navbar = () => {
           }
           to='settings'
         >
-          Settings
+          <HiOutlineCog /> Settings
         </NavLink>
       </div>
     </nav>

@@ -1,11 +1,11 @@
-@use './../../style/colors';
-@use './../../style/defaults';
+@use '../../style/colors';
+@use '../../style/defaults';
 
 .header {
   @include defaults.block;
   grid-area: h;
   padding-bottom: 30px;
-  margin-right: 0px;
+  margin-right: 0;
   h1 {
     display: inline;
   }

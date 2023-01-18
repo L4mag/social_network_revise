@@ -1,11 +1,11 @@
 import style from './App.module.scss'
 import React, { useEffect } from 'react'
-import Navbar from './pages/Navbar/Navbar'
+import Navbar from './layout/Navbar/Navbar'
 import Content from './pages/Content/Content'
-import HeaderContainer from './pages/Header/HeaderContainer'
+import HeaderContainer from './layout/Header/HeaderContainer'
 import Login from './pages/Login/Login'
 import { useDispatch, useSelector } from 'react-redux'
-import { authMe } from './redux/reducers/authReducer'
+import { authMe } from './redux/reducers/authReducer.ts'
 
 const App = () => {
   const isAuth = useSelector((state) => state.auth.isAuth)

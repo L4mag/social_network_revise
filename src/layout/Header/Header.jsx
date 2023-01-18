@@ -1,8 +1,7 @@
 import React from 'react'
 import style from './Header.module.scss'
-import UserImage from './../../assets/user.png'
+import UserImage from '../../assets/user.png'
 import Button from 'react-bootstrap/Button'
-import { logout } from '../../redux/reducers/authReducer'
 
 const Header = (props) => {
   const userImage = props.profile

@@ -45,10 +45,7 @@ type InitialStateType = typeof initialState
 
 const profileReducer = (
   state = initialState,
-  action: {
-    type: any
-    payload?: any
-  }
+  action: { type: any; payload?: any }
 ): InitialStateType => {
   switch (action.type) {
     case ADD_POST:
@@ -116,11 +113,9 @@ export const setProfileThunkCreator =
 
 export const postProfile =
   (profileData: ApiProfileType) => (dispatch: any) => {
-    profilesAPI
-      .postUserProfile(profileData)
-      .then((data) => {
-        dispatch(setProfileThunkCreator(profileData.userId))
-      })
+    profilesAPI.postUserProfile(profileData).then(() => {
+      dispatch(setProfileThunkCreator(profileData.userId))
+    })
   }
 
 export const requestStatus =
@@ -132,7 +127,7 @@ export const requestStatus =
 
 export const pushNewStatus =
   (status: string, userId: number) => (dispatch: any) => {
-    profilesAPI.setUserStatus(status).then((response) => {
+    profilesAPI.setUserStatus(status).then(() => {
       debugger
       dispatch(requestStatus(userId))
     })

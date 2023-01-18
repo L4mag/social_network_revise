@@ -4,16 +4,19 @@ import style from '../../../pages/Content/Profile/Info/Info.module.scss'
 const ProfileBodyLine = ({ header, content }) => {
   let contentComponents = null
 
-  if (typeof content === 'object') {
+  if (content && typeof content === 'object') {
     contentComponents = (
       <ul>
         {Object.keys(content).map((c) => {
           return (
             <li>
               {c}:{' '}
-              {content[c] || (
-                <i className={style.empty}>empty</i>
-              )}
+              {(
+                <a href={`https://${content[c]}`}>
+                  {' '}
+                  {content[c]}{' '}
+                </a>
+              ) || <i className={style.empty}>empty</i>}
             </li>
           )
         })}
@@ -27,7 +30,7 @@ const ProfileBodyLine = ({ header, content }) => {
         <h6>{header}</h6>
         {contentComponents || (
           <p>
-            {content || (
+            {<pre>{content}</pre> || (
               <i className={style.empty}>empty</i>
             )}
           </p>

@@ -1,11 +1,7 @@
 import React from 'react'
-import Post from './Post/Post'
+import Post from '../../../../components/Post/Post'
 import style from './UserPosts.module.scss'
-import {
-  Form,
-  FormControl,
-  FormGroup,
-} from 'react-bootstrap'
+import { Form, FormControl } from 'react-bootstrap'
 import Button from 'react-bootstrap/Button'
 
 const UserPosts = ({
@@ -44,7 +40,7 @@ const UserPosts = ({
         </Form>
       </div>
       {posts.map((post) => (
-        <Post {...post} />
+        <Post {...post} key={post.id} />
       ))}
     </div>
   )

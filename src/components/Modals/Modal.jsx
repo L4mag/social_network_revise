@@ -2,7 +2,14 @@ import React from 'react'
 import Button from 'react-bootstrap/Button'
 import BSModal from 'react-bootstrap/Modal'
 
-const Modal = ({ title, show, onHide, body, footer }) => {
+const Modal = ({
+  title,
+  header,
+  show,
+  onHide,
+  body,
+  footer,
+}) => {
   return (
     <BSModal
       show={show}
@@ -15,6 +22,7 @@ const Modal = ({ title, show, onHide, body, footer }) => {
         <BSModal.Title id='contained-modal-title-vcenter'>
           {title}
         </BSModal.Title>
+        <div style={{ marginLeft: '10px' }}>{header}</div>
       </BSModal.Header>
       <BSModal.Body>{body}</BSModal.Body>
       <BSModal.Footer>
