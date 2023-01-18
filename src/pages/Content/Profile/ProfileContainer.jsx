@@ -2,17 +2,21 @@ import React from 'react'
 import { connect } from 'react-redux'
 import Profile from './Profile'
 import {
+  postProfile,
   pushNewStatus,
   requestStatus,
   setProfileThunkCreator,
 } from '../../../redux/reducers/profileReducer'
 import withRouter from '../../tools/withRouter'
+import { compose } from 'redux'
 
 class ProfileContainer extends React.Component {
   componentDidMount() {
-    const profileId = this.props.router.params.userId
+    const profileId =
+      this.props.router.params.userId ||
+      this.props.authUserId
 
-    requestStatus(this.props.userId)
+    this.props.requestStatus(profileId)
     this.props.setProfileThunkCreator(profileId)
   }
 
@@ -29,8 +33,12 @@ const mapStateToProps = (state) => {
   }
 }
 
-export default connect(mapStateToProps, {
-  setProfileThunkCreator,
-  requestStatus,
-  pushNewStatus,
-})(withRouter(ProfileContainer))
+export default compose(
+  connect(mapStateToProps, {
+    setProfileThunkCreator,
+    postProfile,
+    requestStatus,
+    pushNewStatus,
+  }),
+  withRouter
+)(ProfileContainer)

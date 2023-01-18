@@ -1,0 +1,15 @@
+@import '../../../style/colors';
+@import '../../../style/defaults';
+
+.profileHeader {
+  display: flex;
+
+  border-radius: 5px;
+  margin-top: 20px;
+
+  padding: 30px 30px 0px 30px;
+
+  @include block-shadow;
+
+  background-color: $primary-block-color;
+}

@@ -7,7 +7,7 @@ const LOGIN = 'LOGIN'
 const LOGOUT = 'LOGOUT'
 const SET_MESSAGES = 'SET_MESSAGES'
 
-const initialState = {
+const initialState: InitialStateType = {
   user: {
     id: null,
     login: null,
@@ -19,11 +19,21 @@ const initialState = {
   messages: null,
 }
 
-type InitialStateType = typeof initialState
+type InitialStateType = {
+  user: {
+    id: number | null
+    login: string | null
+    email: string | null
+  }
+  profile: Object | null
+  isFetching: boolean
+  isAuth: boolean
+  messages: Array<string> | null
+}
 
 const authReducer = (
   state = initialState,
-  action: { type: any; payload: { messages: any } }
+  action: { type: any; payload?: any }
 ) => {
   switch (action.type) {
     case SET_USER_DATA:

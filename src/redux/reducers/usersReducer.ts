@@ -23,15 +23,7 @@ type initialStateType = typeof initialState
 
 const userReducer = (
   state = initialState,
-  action: {
-    type: any
-    payload?: {
-      users: any
-      count: any
-      id: number | null
-      page: any
-    }
-  }
+  action: any
 ): initialStateType => {
   switch (action.type) {
     case SET_USERS:
@@ -65,7 +57,6 @@ const userReducer = (
         ],
       }
     case SET_CURRENT_PAGE:
-      // @ts-ignore
       return {
         ...state,
         currentPage: action.payload.page,

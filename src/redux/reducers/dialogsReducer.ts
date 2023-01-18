@@ -33,7 +33,7 @@ type InitialStateType = typeof initialState
 
 const DialogsReducer = (
   state = initialState,
-  action: { type: any; payload?: { text: any } }
+  action: any
 ): InitialStateType => {
   switch (action.type) {
     case ADD_MESSAGE:
@@ -59,7 +59,6 @@ const DialogsReducer = (
         return state
       }
     case HANDLE_ADD_MESSAGE_INPUT:
-      // @ts-ignore
       return {
         ...state,
         newMessageText: action.payload.text,
@@ -72,24 +71,17 @@ const DialogsReducer = (
 export const addMessage = () => ({
   type: ADD_MESSAGE,
 })
-export const handleAddMessageInput = (text: any) => ({
+
+type handleAddMessageInputActionType = {
+  type: typeof HANDLE_ADD_MESSAGE_INPUT
+  payload: { text: string }
+}
+
+export const handleAddMessageInput = (
+  text: string
+): handleAddMessageInputActionType => ({
   type: HANDLE_ADD_MESSAGE_INPUT,
   payload: { text },
 })
 
 export default DialogsReducer
-
-// // ...state.dialogs,
-// // ...state.dialogs.map((d) => {
-// //   // debugger
-//   if (d.id === 1) {
-//     const temp = {
-//       ...d,
-//       messages: [
-//         ...d.messages,
-//         state.newMessageText,
-//       ],
-//     }
-//     return temp
-//   }
-// // }),

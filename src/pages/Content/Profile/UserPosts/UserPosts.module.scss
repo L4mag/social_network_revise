@@ -1,4 +1,6 @@
 $primary-text-color: #f0f8ff;
+@import '../../../../style/colors';
+@import '../../../../style/defaults';
 
 :root {
   --input-color: #99a3ba;
@@ -19,15 +21,20 @@ $primary-text-color: #f0f8ff;
 
 .posts {
   grid-area: posts;
-  margin: 20px;
-  padding: 8px 16px;
+
+  .newPostFormContainer {
+    width: 100%;
+    @include block;
+    padding-bottom: 30px;
+    margin-left: 0px;
+    margin-bottom: 40px;
+  }
 
   .newPostForm {
     display: flex;
     flex-direction: row;
 
     .newPostFormInput {
-      color: $primary-text-color;
       &::placeholder {
         color: var(--input-color);
       }
@@ -35,6 +42,7 @@ $primary-text-color: #f0f8ff;
       border-color: #666;
       width: 100%;
       display: inline;
+      color: $primary-text-color;
     }
 
     button {

@@ -24,25 +24,25 @@ const UserPosts = ({
 
   return (
     <div className={style.posts}>
-      <h4>User Posts</h4>
-      <Form
-        className={style.newPostForm}
-        onSubmit={(e) => {
-          e.preventDefault()
-        }}
-      >
-        <FormControl
-          type='text'
-          placeholder='Post Text'
-          className={style.newPostFormInput}
-          onChange={changePostHandler}
-          value={newPostInput}
-        />
-        <Button onClick={addPostHandler} type='submit'>
-          Add Post
-        </Button>
-      </Form>
-
+      <div className={style.newPostFormContainer}>
+        <Form
+          className={style.newPostForm}
+          onSubmit={(e) => {
+            e.preventDefault()
+          }}
+        >
+          <FormControl
+            type='text'
+            placeholder='Post Text'
+            className={style.newPostFormInput}
+            onChange={changePostHandler}
+            value={newPostInput}
+          />
+          <Button onClick={addPostHandler} type='submit'>
+            Add Post
+          </Button>
+        </Form>
+      </div>
       {posts.map((post) => (
         <Post {...post} />
       ))}

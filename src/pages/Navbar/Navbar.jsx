@@ -1,18 +1,19 @@
 import React from 'react'
 import style from './Navbar.module.scss'
 import { NavLink } from 'react-router-dom'
+import { FaRegUser } from 'react-icons/fa'
 
 const Navbar = () => {
   return (
-    <nav className={`${style.nav} ${style.block}`}>
+    <nav className={`${style.nav}`}>
       <div>
         <NavLink
           className={({ isActive }) =>
             isActive ? style.active : ''
           }
-          to='/'
+          to='/profile'
         >
-          Account
+          <FaRegUser /> Account
         </NavLink>
       </div>
       <div>

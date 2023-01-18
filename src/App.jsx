@@ -1,9 +1,9 @@
 import style from './App.module.scss'
 import React, { useEffect } from 'react'
-import Navbar from './components/Navbar/Navbar'
-import Content from './components/Content/Content'
-import HeaderContainer from './components/Header/HeaderContainer'
-import Login from './components/Login/Login'
+import Navbar from './pages/Navbar/Navbar'
+import Content from './pages/Content/Content'
+import HeaderContainer from './pages/Header/HeaderContainer'
+import Login from './pages/Login/Login'
 import { useDispatch, useSelector } from 'react-redux'
 import { authMe } from './redux/reducers/authReducer'
 

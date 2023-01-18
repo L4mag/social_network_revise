@@ -2,12 +2,14 @@
 @use './../../style/defaults';
 
 .header {
+  @include defaults.block;
   grid-area: h;
+  padding-bottom: 30px;
+  margin-right: 0px;
   h1 {
     display: inline;
   }
 }
 
 .block {
-  @include defaults.block;
 }

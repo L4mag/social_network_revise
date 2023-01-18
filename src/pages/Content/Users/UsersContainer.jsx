@@ -7,7 +7,7 @@ import {
   setUsersThunkCreator,
   unFollowThunkCreator,
 } from '../../../redux/reducers/usersReducer'
-import Preloader from '../../tools/Preloader'
+import Preloader from '../../../components/Preloader'
 import { compose } from 'redux'
 
 class UsersContainer extends React.Component {

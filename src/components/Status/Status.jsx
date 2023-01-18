@@ -4,7 +4,6 @@ import { Form as BSForm } from 'react-bootstrap'
 
 const Status = ({
   pushNewStatus,
-  requestStatus,
   isAuth,
   statusText,
   userId,
@@ -13,15 +12,13 @@ const Status = ({
   const [isEditMode, setIsEditMode] = useState(false)
   const [status, setStatus] = useState(statusText)
 
-  const ref = useRef()
-
   useEffect(() => {
-    requestStatus(userId)
     setStatus(statusText)
   }, [statusText])
 
   const onSubmit = (data) => {
-    pushNewStatus(data.status, authUserId)
+    debugger
+    pushNewStatus(data.status || '', authUserId)
   }
 
   return (
@@ -31,6 +28,7 @@ const Status = ({
           <Field name='status' initialValue={status}>
             {(prop) => {
               if (isAuth && isEditMode) {
+                console.log(prop.input)
                 return (
                   <BSForm.Control
                     autoFocus
@@ -39,14 +37,13 @@ const Status = ({
                     onChange={prop.input.onChange}
                     value={prop.input.value}
                     type='text'
-                    ref={ref}
                     onBlur={() => {
                       handleSubmit()
                       setIsEditMode(false)
                     }}
                   />
                 )
-              } else {
+              } else if (status || userId === authUserId) {
                 return (
                   <p
                     onDoubleClick={() => {
@@ -66,7 +63,8 @@ const Status = ({
             {
               '\
               .status{\
-              margin: auto\
+              margin: auto;\
+              color:white;\
               }\
               .statusInput{\
               height: 1.5em;\

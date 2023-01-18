@@ -1,0 +1,47 @@
+@import '../../../../../style/colors';
+@import '../../../../../style/defaults';
+
+.post {
+  margin-top: 20px;
+  padding: 30px 30px 20px 30px;
+
+  color: $primary-text-color;
+
+  border-radius: 5px;
+  background-color: $primary-block-color;
+  box-shadow: -5px 2px 5px #222;
+
+  img {
+    grid-area: img;
+
+    margin-right: 20px;
+
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    object-fit: cover;
+  }
+
+  .postHeader {
+    margin-top: auto;
+
+    .author {
+      grid-area: author;
+      white-space: nowrap;
+
+      align-self: end;
+      font-weight: 500;
+      font-size: 18px;
+    }
+
+    .publishTime {
+      white-space: nowrap;
+
+      font-size: 12px;
+    }
+  }
+
+  .text {
+    font-size: 14px;
+  }
+}

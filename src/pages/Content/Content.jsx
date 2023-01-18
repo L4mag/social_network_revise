@@ -15,17 +15,13 @@ const Content = () => {
   return (
     <main className={`${style.content} ${style.block}`}>
       <Routes>
-        <Route path={'/login'} element={<Login />} />
+        <Route path={'login'} element={<Login />} />
         <Route
-          index
           path={'profile/:userId?'}
           element={<ProfileContainer />}
         />
+        <Route path={'/'} element={<ProfileContainer />} />
 
-        <Route
-          path={'/'}
-          element={<ProfileContainer />}
-        />
         <Route
           path='dialogs'
           element={<DialogsContainer />}

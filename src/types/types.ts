@@ -52,7 +52,7 @@ export type ApiLogoutResponseType = {
   data: Object
 }
 
-export type ApiProfileResponseType = {
+export type ApiProfileType = {
   aboutMe: StringOrNull
   contacts: {
     facebook: StringOrNull

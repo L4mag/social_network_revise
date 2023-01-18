@@ -1,5 +1,5 @@
 import { profilesAPI } from '../../api/api'
-import { ApiProfileResponseType } from '../../types/types'
+import { ApiProfileType } from '../../types/types'
 
 const ADD_POST = 'ADD_POST'
 const HANDLE_ADD_POST_INPUT = 'HANDLE_ADD_POST_INPUT'
@@ -37,7 +37,7 @@ const initialState = {
     },
   ],
   profile: null,
-  status: '',
+  status: null,
   isProfile: false,
 }
 
@@ -97,48 +97,43 @@ export const handleAddPostInput = (text: string) => ({
   payload: { text },
 })
 
-export const setProfile = (
-  profile: ApiProfileResponseType
-) => ({
+export const setProfile = (profile: ApiProfileType) => ({
   type: SET_PROFILE,
   payload: { profile },
 })
 
-const setStatus = (status: string | void) => ({
+const setStatus = (status: any) => ({
   type: SET_STATUS,
   payload: { status },
 })
 
 export const setProfileThunkCreator =
-  (profileId = 27223) =>
-  (
-    dispatch: (arg0: {
-      type: string
-      payload: { profile: ApiProfileResponseType }
-    }) => void
-  ) => {
+  (profileId: number) => (dispatch: any) => {
     profilesAPI.getUserProfile(profileId).then((data) => {
       dispatch(setProfile(data))
     })
   }
 
+export const postProfile =
+  (profileData: ApiProfileType) => (dispatch: any) => {
+    profilesAPI
+      .postUserProfile(profileData)
+      .then((data) => {
+        dispatch(setProfileThunkCreator(profileData.userId))
+      })
+  }
+
 export const requestStatus =
-  (userId: number) =>
-  (
-    dispatch: (arg0: {
-      type: string
-      payload: { status: string | void }
-    }) => void
-  ) => {
+  (userId: number) => (dispatch: any) => {
     profilesAPI.getUserStatus(userId).then((response) => {
       dispatch(setStatus(response))
     })
   }
 
 export const pushNewStatus =
-  (status: string, userId: number) =>
-  (dispatch: (arg0: (dispatch: any) => void) => void) => {
+  (status: string, userId: number) => (dispatch: any) => {
     profilesAPI.setUserStatus(status).then((response) => {
+      debugger
       dispatch(requestStatus(userId))
     })
   }

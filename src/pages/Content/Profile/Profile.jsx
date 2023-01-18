@@ -4,12 +4,9 @@ import Info from './Info/Info'
 import style from './Profile.module.scss'
 import UserPostsContainer from './UserPosts/UserPostsContainer'
 import userImage from '../../../assets/user.png'
-import Status from './Status/Status'
-import {
-  pushNewStatus,
-  requestStatus,
-} from '../../../redux/reducers/profileReducer'
+import Status from '../../../components/Status/Status'
 import { Col, Row, Container } from 'react-bootstrap'
+import { postProfile } from '../../../redux/reducers/profileReducer'
 
 const Profile = ({
   profile,
@@ -18,7 +15,7 @@ const Profile = ({
   status,
   isAuth,
   authUserId,
-  userId,
+  postProfile,
 }) => {
   if (!profile) {
     return <></>
@@ -27,7 +24,7 @@ const Profile = ({
   const avatar = profile.photos.large || userImage
 
   return (
-    <div className={`${style.profile}`}>
+    <>
       <div className={`${style.profileHeader}`}>
         <Container>
           <Row>
@@ -35,7 +32,10 @@ const Profile = ({
               <Avatar img={avatar} />
             </Col>
             <Col>
-              <Info profile={profile} />
+              <Info
+                profile={profile}
+                postProfile={postProfile}
+              />
             </Col>
           </Row>
           <Row>
@@ -53,7 +53,7 @@ const Profile = ({
         </Container>
       </div>
       <UserPostsContainer />
-    </div>
+    </>
   )
 }
 
