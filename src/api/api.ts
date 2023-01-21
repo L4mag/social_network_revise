@@ -5,6 +5,7 @@ import {
   ApiGetUsersResponseType,
   ApiLoginResponseType,
   ApiLogoutResponseType,
+  ApiProfilePostResponse,
   ApiProfileType,
   ApiStatusPostResponse,
 } from '../types/types'
@@ -78,11 +79,9 @@ export const profilesAPI = {
       .get<ApiProfileType>(`profile/${userId}`)
       .then((response) => response.data)
   },
-  postUserProfile(
-    profileData: ApiProfileType
-  ): Promise<ApiProfileType> {
+  postUserProfile(profileData: ApiProfileType) {
     return apiInstance
-      .put<ApiProfileType>(`profile`, profileData)
+      .put<ApiProfilePostResponse>(`profile`, profileData)
       .then((response) => response.data)
   },
   getUserStatus(userId: number): Promise<string> {

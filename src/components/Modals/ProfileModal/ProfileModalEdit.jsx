@@ -20,7 +20,12 @@ const ProfileModalEdit = ({
                 Save
               </Button>
             }
-            body={<ProfileModalEditBody {...profile} />}
+            body={
+              <ProfileModalEditBody
+                {...profile}
+                {...props}
+              />
+            }
             {...restProps}
           />
         )

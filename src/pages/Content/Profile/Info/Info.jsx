@@ -5,7 +5,7 @@ import ProfileModal from '../../../../components/Modals/ProfileModal/ProfileModa
 import ProfileModalEdit from '../../../../components/Modals/ProfileModal/ProfileModalEdit'
 import shortString from '../../../tools/shortString'
 
-const Info = ({ profile, postProfile }) => {
+const Info = ({ profile, postProfile, messages }) => {
   const profileInfo = profile
 
   const [isModalShow, setIsModalShow] = useState(false)
@@ -14,7 +14,9 @@ const Info = ({ profile, postProfile }) => {
 
   const onProfileSubmit = (data) => {
     const profileData = { userId: profile.userId, ...data }
+
     postProfile(profileData)
+
     setIsModalShow(false)
     setIsProfileEditMode(false)
   }

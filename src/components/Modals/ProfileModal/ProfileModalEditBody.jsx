@@ -7,6 +7,7 @@ const ProfileModalEditBody = ({
   lookingForAJob,
   lookingForAJobDescription,
   contacts,
+  ...restProps
 }) => {
   return (
     <>
@@ -15,12 +16,14 @@ const ProfileModalEditBody = ({
         component='input'
         name='fullName'
         initialValue={fullName}
+        {...restProps}
       />
       <ProfileBodyField
         title='About Me'
         component='textarea'
         name='aboutMe'
         initialValue={aboutMe}
+        {...restProps}
       />
       <ProfileBodyField
         title='Looking for a job'
@@ -28,6 +31,7 @@ const ProfileModalEditBody = ({
         type='checkbox'
         name='lookingForAJob'
         initialValue={lookingForAJob}
+        {...restProps}
       />
       {lookingForAJob && (
         <ProfileBodyField
@@ -35,6 +39,7 @@ const ProfileModalEditBody = ({
           component='textarea'
           name='lookingForAJobDescription'
           initialValue={lookingForAJobDescription}
+          {...restProps}
         />
       )}
       <ProfileBodyField
@@ -42,6 +47,7 @@ const ProfileModalEditBody = ({
         component='input'
         name='contacts'
         initialValue={contacts}
+        {...restProps}
       />
     </>
   )

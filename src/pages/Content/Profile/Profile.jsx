@@ -16,6 +16,7 @@ const Profile = ({
   isAuth,
   authUserId,
   postProfile,
+  messages,
 }) => {
   if (!profile) {
     return <></>
@@ -35,6 +36,7 @@ const Profile = ({
               <Info
                 profile={profile}
                 postProfile={postProfile}
+                messages={messages}
               />
             </Col>
           </Row>

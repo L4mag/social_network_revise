@@ -6,6 +6,7 @@ const ProfileBodyField = ({
   name,
   component,
   title,
+  meta,
   ...restPros
 }) => {
   return (
@@ -17,6 +18,7 @@ const ProfileBodyField = ({
             return (
               <div>
                 <span>{val}: </span>
+
                 <Field
                   name={`${name}.${val}`}
                   component={component}
@@ -31,15 +33,19 @@ const ProfileBodyField = ({
       ) : (
         <Field
           name={name}
-          component={component}
           initialValue={initialValue}
-          style={
-            restPros.type !== 'checkbox'
-              ? { width: '100%' }
-              : null
-          }
           {...restPros}
-        />
+        >
+          {({ input, meta }) => (
+            <div>
+              <label>{name}</label>
+              <input {...input} type='text' />
+              {meta.error && meta.touched && (
+                <span>{meta.error}</span>
+              )}
+            </div>
+          )}
+        </Field>
       )}
       <hr />
     </div>

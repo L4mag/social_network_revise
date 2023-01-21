@@ -1,10 +1,14 @@
 import { profilesAPI } from '../../api/api'
-import { ApiProfileType } from '../../types/types'
+import {
+  ApiProfileType,
+  ServerMessages,
+} from '../../types/types'
 
 const ADD_POST = 'ADD_POST'
 const HANDLE_ADD_POST_INPUT = 'HANDLE_ADD_POST_INPUT'
 const SET_PROFILE = 'SET_PROFILE'
 const SET_STATUS = 'SET_STATUS'
+const SET_MESSAGES = 'SET_MESSAGES'
 
 const initialState = {
   newPostInput: '',
@@ -39,6 +43,7 @@ const initialState = {
   profile: null,
   status: null,
   isProfile: false,
+  messages: [] as any,
 }
 
 type InitialStateType = typeof initialState
@@ -81,6 +86,15 @@ const profileReducer = (
         ...state,
         status: action.payload.status,
       }
+    case SET_MESSAGES: {
+      const temp = [...action.payload.messages]
+      debugger
+
+      return {
+        ...state,
+        messages: [...action.payload.messages],
+      }
+    }
     default:
       return state
   }
@@ -104,6 +118,13 @@ const setStatus = (status: any) => ({
   payload: { status },
 })
 
+export const setErrorMessages = (
+  messages: ServerMessages
+) => ({
+  type: SET_MESSAGES,
+  payload: { messages },
+})
+
 export const setProfileThunkCreator =
   (profileId: number) => (dispatch: any) => {
     profilesAPI.getUserProfile(profileId).then((data) => {
@@ -113,9 +134,14 @@ export const setProfileThunkCreator =
 
 export const postProfile =
   (profileData: ApiProfileType) => (dispatch: any) => {
-    profilesAPI.postUserProfile(profileData).then(() => {
-      dispatch(setProfileThunkCreator(profileData.userId))
-    })
+    profilesAPI
+      .postUserProfile(profileData)
+      .then((response) => {
+        if (response.resultCode === 1) {
+          dispatch(setErrorMessages(response.messages))
+        }
+        dispatch(setProfileThunkCreator(profileData.userId))
+      })
   }
 
 export const requestStatus =

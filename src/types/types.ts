@@ -1,6 +1,6 @@
-type ServerMessages = Array<string>
-type ServerCodes = 1 | 0
-type StringOrNull = string | null
+export type ServerMessages = Array<string>
+export type ServerCodes = 1 | 0
+export type StringOrNull = string | null
 
 export type UserType = {
   name: string | null
@@ -69,6 +69,13 @@ export type ApiProfileType = {
   fullName: string
   userId: number
   photos?: PhotoType
+}
+
+export type ApiProfilePostResponse = {
+  data: object
+  fieldsErrors: ServerMessages
+  messages: ServerMessages
+  resultCode: ServerCodes
 }
 
 export type ApiStatusPostResponse = {
