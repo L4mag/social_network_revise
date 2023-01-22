@@ -17,6 +17,8 @@ const Info = ({ profile, postProfile, messages }) => {
 
     postProfile(profileData)
 
+    if (messages.length > 0) return
+    debugger
     setIsModalShow(false)
     setIsProfileEditMode(false)
   }
@@ -57,6 +59,7 @@ const Info = ({ profile, postProfile, messages }) => {
               show={isModalShow}
               profile={profile}
               onProfileSubmit={onProfileSubmit}
+              messages={messages}
             />
           ) : (
             <ProfileModal

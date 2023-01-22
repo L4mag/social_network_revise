@@ -27,7 +27,7 @@ const ProfileModalEditBody = ({
       />
       <ProfileBodyField
         title='Looking for a job'
-        component='input'
+        component='checkbox'
         type='checkbox'
         name='lookingForAJob'
         initialValue={lookingForAJob}

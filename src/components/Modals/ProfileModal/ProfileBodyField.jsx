@@ -1,5 +1,6 @@
 import React from 'react'
 import { Field } from 'react-final-form'
+import { Form } from 'react-bootstrap'
 
 const ProfileBodyField = ({
   initialValue,
@@ -25,7 +26,17 @@ const ProfileBodyField = ({
                   initialValue={initialValue[val]}
                   style={{ marginLeft: 'auto' }}
                   {...restPros}
-                />
+                >
+                  {(prop) => {
+                    debugger
+                    return (
+                      <Form.Control
+                        type={component}
+                        {...prop.input}
+                      />
+                    )
+                  }}
+                </Field>
               </div>
             )
           })}

@@ -134,6 +134,4 @@ const Login = (props) => {
   return <LoginForm onSubmit={loginHandler} />
 }
 
-export default compose(connect(() => ({}), { login }))(
-  Login
-)
+export default compose(connect(null, { login }))(Login)
