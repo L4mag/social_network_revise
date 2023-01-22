@@ -125,6 +125,14 @@ export const setErrorMessages = (
   payload: { messages },
 })
 
+export const postProfilePhoto =
+  (photoFile: FileList, profileId: number) =>
+  (dispatch: any) => {
+    profilesAPI.setProfilePhoto(photoFile).then((res) => {
+      dispatch(setProfileThunkCreator(profileId))
+    })
+  }
+
 export const setProfileThunkCreator =
   (profileId: number) => (dispatch: any) => {
     profilesAPI.getUserProfile(profileId).then((data) => {

@@ -30,7 +30,11 @@ const Profile = ({
         <Container>
           <Row>
             <Col lg={3}>
-              <Avatar img={avatar} />
+              <Avatar
+                img={avatar}
+                userId={profile.userId}
+                authUserId={authUserId}
+              />
             </Col>
             <Col>
               <Info

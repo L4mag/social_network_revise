@@ -1,3 +1,4 @@
+import { setProfile } from './../redux/reducers/profileReducer'
 import axios from 'axios'
 import {
   ApiAuthMeResponseType,
@@ -74,17 +75,31 @@ export const authAPI = {
 }
 
 export const profilesAPI = {
-  getUserProfile(userId: number): Promise<ApiProfileType> {
+  getUserProfile(userId: number) {
     return apiInstance
       .get<ApiProfileType>(`profile/${userId}`)
       .then((response) => response.data)
+  },
+  setProfilePhoto(photoFile: FileList) {
+    let formData = new FormData()
+
+    formData.append('image', photoFile[0])
+
+    return apiInstance
+      .put(`profile/photo`, formData, {
+        withCredentials: true,
+        headers: {
+          'Content-Type': 'multipart/form-data',
+        },
+      })
+      .then((res) => res)
   },
   postUserProfile(profileData: ApiProfileType) {
     return apiInstance
       .put<ApiProfilePostResponse>(`profile`, profileData)
       .then((response) => response.data)
   },
-  getUserStatus(userId: number): Promise<string> {
+  getUserStatus(userId: number) {
     return apiInstance
       .get<string>(`profile/status/${userId}`)
       .then((response) => response.data)
