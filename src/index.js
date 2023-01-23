@@ -5,15 +5,23 @@ import App from './App'
 import { BrowserRouter } from 'react-router-dom'
 import { Provider } from 'react-redux'
 import store from './redux/reduxStore'
+import {
+  QueryClientProvider,
+  QueryClient,
+} from 'react-query'
 
 const root = ReactDOM.createRoot(
   document.getElementById('root')
 )
 
+const queryClient = new QueryClient()
+
 root.render(
-  <BrowserRouter>
-    <Provider store={store}>
-      <App />
-    </Provider>
-  </BrowserRouter>
+  <QueryClientProvider client={queryClient}>
+    <BrowserRouter>
+      <Provider store={store}>
+        <App />
+      </Provider>
+    </BrowserRouter>
+  </QueryClientProvider>
 )

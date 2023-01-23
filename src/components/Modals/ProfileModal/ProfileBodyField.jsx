@@ -28,7 +28,6 @@ const ProfileBodyField = ({
                   {...restPros}
                 >
                   {(prop) => {
-                    debugger
                     return (
                       <Form.Control
                         type={component}

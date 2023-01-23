@@ -6,6 +6,8 @@ const TOGGLE_IS_FETCHING = 'TOGGLE_IS_FETCHING'
 const LOGIN = 'LOGIN'
 const LOGOUT = 'LOGOUT'
 const SET_MESSAGES = 'SET_MESSAGES'
+const SET_CAPTCHA_URL = 'SET_CAPTCHA_URL'
+const SET_CAPTCHA = 'SET_CAPTCHA'
 
 const initialState: InitialStateType = {
   user: {
@@ -17,6 +19,8 @@ const initialState: InitialStateType = {
   isFetching: false,
   isAuth: false,
   messages: null,
+  captcha: null,
+  captchaUrl: null,
 }
 
 type InitialStateType = {
@@ -29,6 +33,8 @@ type InitialStateType = {
   isFetching: boolean
   isAuth: boolean
   messages: Array<string> | null
+  captcha: null | string
+  captchaUrl: null | string
 }
 
 const authReducer = (
@@ -61,6 +67,16 @@ const authReducer = (
         ...state,
         messages: action.payload.messages,
       }
+    case SET_CAPTCHA:
+      return {
+        ...state,
+        captcha: action.payload.captcha,
+      }
+    case SET_CAPTCHA_URL:
+      return {
+        ...state,
+        captchaUrl: action.payload.url,
+      }
     default:
       return state
   }
@@ -89,30 +105,45 @@ const setMessages = (messages: string[]) => ({
   },
 })
 
-export const authMe =
-  () =>
-  (
-    dispatch: (arg0: {
-      type: string
-      payload: { id: number; email: string; login: string }
-    }) => void
-  ) => {
-    authAPI.getUserData().then((r) => {
-      if (r.resultCode === 0) {
-        dispatch(setUserData(r.data))
-      }
-    })
-  }
+const setCaptchaUrl = (url: string) => ({
+  type: SET_CAPTCHA_URL,
+  payload: { url },
+})
+const setCaptcha = (captcha: string) => ({
+  type: SET_CAPTCHA_URL,
+  payload: { captcha },
+})
+
+export const setCaptchaUrlThunk = () => (dispatch: any) => {
+  authAPI.getCaptchaUrl().then((res) => {
+    dispatch(setCaptchaUrl(res.url))
+  })
+}
+
+export const authMe = () => (dispatch: any) => {
+  authAPI.getUserData().then((r) => {
+    if (r.resultCode === 0) {
+      dispatch(setUserData(r.data))
+    }
+  })
+}
 
 export const login =
-  (email: string, password: string, rememberMe: boolean) =>
+  (
+    email: string,
+    password: string,
+    rememberMe: boolean,
+    captcha?: string
+  ) =>
   (dispatch: (arg0: unknown) => void) => {
-    authAPI.login(email, password, rememberMe).then((r) => {
-      if (r.resultCode === 0) {
-        dispatch(authMe())
-      }
-      dispatch(setMessages(r.messages))
-    })
+    authAPI
+      .login(email, password, rememberMe, captcha)
+      .then((r) => {
+        if (r.resultCode === 0) {
+          dispatch(authMe())
+        }
+        dispatch(setMessages(r.messages))
+      })
   }
 
 export const logout =

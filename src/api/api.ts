@@ -22,13 +22,15 @@ const apiInstance = axios.create({
 export const usersAPI = {
   getUsers(
     currentPage: number = 1,
-    pageSize: number = 8
+    pageSize: number = 6
   ): Promise<ApiGetUsersResponseType> {
     return apiInstance
       .get<ApiGetUsersResponseType>(
-        `users?page=${currentPage}&count=${pageSize}`
+        `users?page=${currentPage + 1}&count=${pageSize}`
       )
-      .then((response) => response.data)
+      .then((response) => {
+        return response.data
+      })
   },
   followUser(
     userId: number
@@ -57,19 +59,26 @@ export const authAPI = {
   login(
     email: string,
     password: string,
-    rememberMe: boolean
-  ): Promise<ApiLoginResponseType> {
+    rememberMe: boolean,
+    captcha?: string
+  ) {
     return apiInstance
       .post<ApiLoginResponseType>(`auth/login`, {
         email,
         password,
         rememberMe,
+        captcha,
       })
       .then((response) => response.data)
   },
-  logout(): Promise<ApiLogoutResponseType> {
+  logout() {
     return apiInstance
       .post<ApiLogoutResponseType>(`auth/logout`)
+      .then((response) => response.data)
+  },
+  getCaptchaUrl() {
+    return apiInstance
+      .post(`security/get-captcha-url`)
       .then((response) => response.data)
   },
 }

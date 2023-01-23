@@ -12,7 +12,7 @@ const TOGGLE_IS_FOLLOW_FETCHING =
 
 const initialState = {
   users: [] as Array<UserType>,
-  currentPage: 1,
+  currentPage: 0,
   totalCount: null as unknown as number,
   pageSize: 6,
   isFetching: false,
@@ -57,6 +57,7 @@ const userReducer = (
         ],
       }
     case SET_CURRENT_PAGE:
+      debugger
       return {
         ...state,
         currentPage: action.payload.page,
@@ -153,19 +154,7 @@ export const toggleIsFollowFetching =
 
 export const setUsersThunkCreator =
   (currentPage: number, pageSize: number) =>
-  (
-    dispatch: (arg0: {
-      type:
-        | 'SET_USERS'
-        | 'SET_CURRENT_PAGE'
-        | 'TOGGLE_IS_FETCHING'
-        | 'SET_TOTAL_COUNT'
-      payload?:
-        | { users: UserType[] }
-        | { count: number }
-        | { page: number }
-    }) => void
-  ) => {
+  (dispatch: any) => {
     dispatch(toggleIsFetching())
     usersAPI
       .getUsers(currentPage, pageSize)

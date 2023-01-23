@@ -1,19 +1,38 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { Alert, Form as BSForm } from 'react-bootstrap'
 import Button from 'react-bootstrap/Button'
 import { Field, Form } from 'react-final-form'
 import { compose } from 'redux'
-import { connect, useSelector } from 'react-redux'
-import { login } from '../../redux/reducers/authReducer'
+import {
+  connect,
+  useDispatch,
+  useSelector,
+} from 'react-redux'
+import {
+  login,
+  setCaptchaUrlThunk,
+} from '../../redux/reducers/authReducer'
 import { required } from '../tools/validators/validators'
 
 const loginRequired = required('Login')
 const passwordRequired = required('Password')
 
 let LoginForm = (props) => {
-  const messages = useSelector(
-    (state) => state.auth.messages
-  )
+  const [messages, captchaUrl] = useSelector((state) => [
+    state.auth.messages,
+    state.auth.captchaUrl,
+  ])
+
+  const dispatch = useDispatch()
+
+  useEffect(() => {
+    if (
+      messages &&
+      messages[0] === 'Incorrect anti-bot symbols'
+    ) {
+      dispatch(setCaptchaUrlThunk())
+    }
+  }, [messages])
 
   return (
     <>
@@ -92,6 +111,29 @@ let LoginForm = (props) => {
                 </Field>
               </BSForm.Group>
 
+              {captchaUrl && (
+                <>
+                  <img src={captchaUrl} alt='Captcha' />
+                  <BSForm.Group className='mb-3'>
+                    <Field name='captcha'>
+                      {(props) => (
+                        <>
+                          <BSForm.Label>
+                            Captcha
+                          </BSForm.Label>
+                          <BSForm.Control
+                            type='text'
+                            placeholder='Enter Text'
+                            required
+                            {...props.input}
+                          />
+                        </>
+                      )}
+                    </Field>
+                  </BSForm.Group>
+                </>
+              )}
+
               <BSForm.Group
                 className='mb-3'
                 controlId='formBasicCheckbox'
@@ -126,8 +168,8 @@ let LoginForm = (props) => {
 
 const Login = (props) => {
   const loginHandler = (data, func) => {
-    const { login, password, rememberMe } = data
-    props.login(login, password, rememberMe)
+    const { login, password, rememberMe, captcha } = data
+    props.login(login, password, rememberMe, captcha)
     func.reset()
   }
 

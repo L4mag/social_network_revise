@@ -88,7 +88,6 @@ const profileReducer = (
       }
     case SET_MESSAGES: {
       const temp = [...action.payload.messages]
-      debugger
 
       return {
         ...state,
@@ -162,7 +161,6 @@ export const requestStatus =
 export const pushNewStatus =
   (status: string, userId: number) => (dispatch: any) => {
     profilesAPI.setUserStatus(status).then(() => {
-      debugger
       dispatch(requestStatus(userId))
     })
   }

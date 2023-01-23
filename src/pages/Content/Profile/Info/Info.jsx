@@ -23,7 +23,7 @@ const Info = ({ profile, postProfile, messages }) => {
     postProfile(profileData)
 
     if (messages.length > 0) return
-    debugger
+
     setIsModalShow(false)
     setIsProfileEditMode(false)
   }

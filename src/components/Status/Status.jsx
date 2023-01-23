@@ -17,7 +17,7 @@ const Status = ({
   }, [statusText])
 
   const onSubmit = (data) => {
-    debugger
+
     pushNewStatus(data.status || '', authUserId)
   }
 

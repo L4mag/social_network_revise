@@ -27,6 +27,7 @@ class UsersContainer extends React.Component {
   }
 
   onSetPageHandler(page) {
+    console.log(page)
     const pageSize = this.props.pageSize
 
     this.props.setUsersThunkCreator(page, pageSize)
