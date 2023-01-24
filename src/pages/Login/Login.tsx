@@ -2,71 +2,49 @@ import React, { useEffect } from 'react'
 import { Alert, Form as BSForm } from 'react-bootstrap'
 import Button from 'react-bootstrap/Button'
 import { Field, Form } from 'react-final-form'
-import { compose } from 'redux'
+import { useDispatch } from 'react-redux'
 import {
-  connect,
-  useDispatch,
-  useSelector,
-} from 'react-redux'
-import {
-  login,
-  setCaptchaUrlThunk,
-} from '../../redux/reducers/authReducer'
-import { required } from '../tools/validators/validators'
+  useAppDispatch,
+  useAppSelector,
+} from '../../hooks/redux'
+import { required } from '../../tools/validators/validators'
+import { FormApi } from 'final-form'
+import { authSlice } from '../../redux/reducers/authSlice'
+import { IAuthData } from '../../types/types'
+import { fetchLogin } from '../../redux/reducers/authActionCreators'
 
 const loginRequired = required('Login')
 const passwordRequired = required('Password')
 
-let LoginForm = (props) => {
-  const [messages, captchaUrl] = useSelector((state) => [
-    state.auth.messages,
-    state.auth.captchaUrl,
+type LoginProps = {
+  onSubmit(data: IAuthData, func: FormApi): void
+}
+
+const LoginForm = (props: LoginProps) => {
+  const [errors, captchaUrl] = useAppSelector((state) => [
+    state.authReducer.errors,
+    state.authReducer.captchaUrl,
   ])
-
-  const dispatch = useDispatch()
-
-  useEffect(() => {
-    if (
-      messages &&
-      messages[0] === 'Incorrect anti-bot symbols'
-    ) {
-      dispatch(setCaptchaUrlThunk())
-    }
-  }, [messages])
 
   return (
     <>
-      <Form
-        onSubmit={props.onSubmit}
-        validate={(values) => {
-          const errors = {}
-          if (!values.login) {
-            errors.login = loginRequired(values.login)
-          }
-          if (!values.password)
-            errors.password = passwordRequired(
-              values.password
-            )
-          return errors
-        }}
-      >
+      <Form onSubmit={props.onSubmit}>
         {(props) => {
           return (
             <BSForm
               className='position-absolute top-50 start-50 translate-middle'
               onSubmit={props.handleSubmit}
-              validated={props.error && props.touched}
             >
-              {messages &&
-                messages.map((mes) => (
-                  <Alert variant='danger'>{mes}</Alert>
+              {errors &&
+                errors.map((err) => (
+                  <Alert variant='danger'>{err}</Alert>
                 ))}
               <BSForm.Group
                 className='mb-3'
                 controlId='formBasicEmail'
               >
                 <Field
-                  name='login'
+                  name='email'
                   validate={loginRequired}
                 >
                   {(props) => (
@@ -138,21 +116,20 @@ let LoginForm = (props) => {
                 className='mb-3'
                 controlId='formBasicCheckbox'
               >
-                <Field name='rememberMe' type='checkbox'>
+                {/* <Field name='rememberMe' type='checkbox'>
                   {(props) => (
                     <BSForm.Check
-                      type='checkbox'
                       label='remember me'
                       {...props.input}
                     />
                   )}
-                </Field>
+                </Field> */}
               </BSForm.Group>
               <Button
                 variant='primary'
                 type='submit'
                 disabled={
-                  !props.values.login &&
+                  !props.values.email &&
                   !props.values.password
                 }
               >
@@ -166,14 +143,20 @@ let LoginForm = (props) => {
   )
 }
 
-const Login = (props) => {
-  const loginHandler = (data, func) => {
-    const { login, password, rememberMe, captcha } = data
-    props.login(login, password, rememberMe, captcha)
+const Login = () => {
+  const dispatch = useAppDispatch()
+
+  const login = (data: IAuthData): void => {
+    dispatch(fetchLogin(data))
+  }
+
+  const loginHandler = (data: IAuthData, func: FormApi) => {
+    debugger
+    login(data)
     func.reset()
   }
 
   return <LoginForm onSubmit={loginHandler} />
 }
 
-export default compose(connect(null, { login }))(Login)
+export default Login

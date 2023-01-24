@@ -1,3 +1,4 @@
+import { IAuthData } from './../types/types'
 import { setProfile } from './../redux/reducers/profileReducer'
 import axios from 'axios'
 import {
@@ -56,20 +57,10 @@ export const authAPI = {
       .get<ApiAuthMeResponseType>(`auth/me`)
       .then((response) => response.data)
   },
-  login(
-    email: string,
-    password: string,
-    rememberMe: boolean,
-    captcha?: string
-  ) {
+  login(authData: IAuthData) {
     return apiInstance
-      .post<ApiLoginResponseType>(`auth/login`, {
-        email,
-        password,
-        rememberMe,
-        captcha,
-      })
-      .then((response) => response.data)
+      .post<ApiLoginResponseType>(`auth/login`, authData)
+      .then((response) => response)
   },
   logout() {
     return apiInstance

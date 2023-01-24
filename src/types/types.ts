@@ -2,6 +2,13 @@ export type ServerMessages = Array<string>
 export type ServerCodes = 1 | 0
 export type StringOrNull = string | null
 
+export interface IAuthData {
+  email?: string
+  password?: string
+  captcha?: string
+  rememberMe?: boolean
+}
+
 export type UserType = {
   name: string | null
   id: number | null

@@ -1,5 +1,6 @@
 import { usersAPI } from '../../api/api'
 import { UserType } from '../../types/types'
+import updateObjParInArray from '../../tools/updateObjParInArray'
 
 const SET_USERS = 'SET_USERS'
 const FOLLOW = 'FOLLOW'
@@ -36,28 +37,25 @@ const userReducer = (
       // @ts-ignore
       return {
         ...state,
-        users: [
-          ...state.users.map((user) =>
-            user.id === action.payload.id
-              ? { ...user, followed: true }
-              : user
-          ),
-        ],
+        users: updateObjParInArray(
+          state.users,
+          'id',
+          action.payload.id,
+          { followed: true }
+        ),
       }
     case UNFOLLOW:
       // @ts-ignore
       return {
         ...state,
-        users: [
-          ...state.users.map((user) =>
-            user.id === action.payload.id
-              ? { ...user, followed: false }
-              : user
-          ),
-        ],
+        users: updateObjParInArray(
+          state.users,
+          'id',
+          action.payload.id,
+          { followed: false }
+        ),
       }
     case SET_CURRENT_PAGE:
-      debugger
       return {
         ...state,
         currentPage: action.payload.page,

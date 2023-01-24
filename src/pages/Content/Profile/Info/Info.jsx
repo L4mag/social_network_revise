@@ -3,7 +3,7 @@ import style from './Info.module.scss'
 import Button from 'react-bootstrap/Button'
 import ProfileModal from '../../../../components/Modals/ProfileModal/ProfileModal'
 import ProfileModalEdit from '../../../../components/Modals/ProfileModal/ProfileModalEdit'
-import shortString from '../../../tools/shortString'
+import shortString from '../../../../tools/shortString'
 import useModal from '../../../../hooks/useModal'
 
 const Info = ({ profile, postProfile, messages }) => {

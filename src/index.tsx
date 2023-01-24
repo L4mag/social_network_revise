@@ -4,17 +4,19 @@ import './style/index.scss'
 import App from './App'
 import { BrowserRouter } from 'react-router-dom'
 import { Provider } from 'react-redux'
-import store from './redux/reduxStore'
+import { setupStore, AppStore } from './redux/reduxStore'
 import {
   QueryClientProvider,
   QueryClient,
 } from 'react-query'
 
 const root = ReactDOM.createRoot(
-  document.getElementById('root')
+  document.getElementById('root') as HTMLElement
 )
 
 const queryClient = new QueryClient()
+
+const store: AppStore = setupStore()
 
 root.render(
   <QueryClientProvider client={queryClient}>

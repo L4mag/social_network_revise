@@ -1,3 +1,4 @@
+//@ts-ignore
 import style from './App.module.scss'
 import React, { useEffect } from 'react'
 import Navbar from './layout/Navbar/Navbar'
@@ -5,15 +6,19 @@ import Content from './pages/Content/Content'
 import HeaderContainer from './layout/Header/HeaderContainer'
 import Login from './pages/Login/Login'
 import { useDispatch, useSelector } from 'react-redux'
-import { authMe } from './redux/reducers/authReducer.ts'
+// import { authMe } from './redux/reducers/authReducer'
+import { RootState } from './redux/reduxStore'
+import { useAppSelector } from './hooks/redux'
 
 const App = () => {
-  const isAuth = useSelector((state) => state.auth.isAuth)
-  const dispatch = useDispatch()
+  const isAuth = useAppSelector(
+    (state) => state.authReducer.isAuth
+  )
+  const dispatch: any = useDispatch()
 
-  useEffect(() => {
-    dispatch(authMe())
-  }, [])
+  // useEffect(() => {
+  //   dispatch(authMe())
+  // }, [])
 
   if (!isAuth) {
     return (

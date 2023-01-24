@@ -7,7 +7,7 @@ import {
   requestStatus,
   setProfileThunkCreator,
 } from '../../../redux/reducers/profileReducer'
-import withRouter from '../../tools/withRouter'
+import withRouter from '../../../hoc/withRouter'
 import { compose } from 'redux'
 
 class ProfileContainer extends React.Component {
